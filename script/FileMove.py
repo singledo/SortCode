@@ -1,3 +1,4 @@
+#!/bin/bash
 #-*- coding=utf-8 -*-
 
 import os
@@ -19,7 +20,7 @@ def Traver(path="", suffiexs=""):
             filelist.append(root+'/'+name)
     return filelist
 
-def Copy(src="", dst="", suffiexs="", isOverWrite=True):
+def Copy(src="", dst="" , isOverWrite=True):
     filelist = Traver(path=src, suffiexs=".md")
     if os.path.exists(dst) == False:
         os.makedirs(dst)
@@ -53,11 +54,12 @@ def Run(argv=[]):
     if _len == 0:
         print("Empty Input .....")
         return
+    optlist = ""
+    remind  = ""
     try:
-        optlist, remind = (getopt.getopt(argv, "s:d:suf:o:", [
+        optlist, remind = (getopt.getopt(argv, "s:d:o:", [
             '--source=',
             '--destnation=',
-            '--suffiexs=',
             '--OverWrite=',
         ]))
         print(optlist, remind)
@@ -68,7 +70,6 @@ def Run(argv=[]):
     isOverWrite = True
     destnation  = ""
     source      = ""
-    suffiexs    = ""
     
     for opt, arg in optlist:
         if opt in ("-o", "--OverWrite"):
@@ -78,12 +79,10 @@ def Run(argv=[]):
             destnation = arg
         elif opt in ("-s", "--souce"):
             source = arg
-        elif opt in ("-suf", "--sufiexs"):
-            suffiexs = arg
     if len(destnation) == 0 or len(source) == 0:
         print("Enpty destnation or source path")
         return 
-    Copy(source, destnation, suffiexs, isOverWrite )
+    Copy(source, destnation, isOverWrite )
 
 
 
@@ -96,4 +95,7 @@ if __name__=="__main__":
     # Traver(path=path, suffiexs=".md")
     # print(sys.argv[0], sys.argv[1], sys.argv[2])
     # Copy(src=path, dst="./", suffiexs=".md")
+    str = "FileMove.py -s /home/zz/blog/source/_posts/ -d /home/zz/workstation/sort/markdown/  -o true"
+
+    _argv = []
     Run(sys.argv[1:])

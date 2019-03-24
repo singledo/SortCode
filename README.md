@@ -10,5 +10,7 @@ add merger sort arithmetic
 ## 19-03-17
 添加同类型批量拷贝脚本
 
+## 19-03-24
+Add Heap sort arithmetic, but not compelete.
 
 
