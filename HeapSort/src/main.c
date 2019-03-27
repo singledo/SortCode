@@ -4,9 +4,10 @@ int main(int argc, char *argv[])
 {
 	printf ("heap sort programe ..... \r\n");
 	tHeap heap;
-	u4 u4Index  = 0;
+	u4 i4Index  = 0;
 	u4 u4Seed 	= 0;
-	u4 u4ArryLen = 20;
+	u4 u4ArryLen = 16;
+	u4 val = 0;
 
 	srandom(random());
 
@@ -16,20 +17,36 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	for (u4Index = 0; u4Index<u4ArryLen; u4Index++)
+	for (i4Index = 0; i4Index<u4ArryLen; i4Index++)
 	{
-		heap.u4Arry[u4Index] = random() % 40;
-		printf ("[%d]  ", heap.u4Arry[u4Index]);
-		if (u4Index % 10 == 0 && u4Index != 0)
-		{
-			printf ("\r\n");
-		}
+		heap.u4Arry[i4Index] = random() % 40;
+		printf ("[%d]",heap.u4Arry[i4Index]);
 	}
-	
+	printf ("\r\n ################## \r\n");
 	BuildHeap(&heap);
+	TraverArry(&heap);
+	printf ("\r\n ################## \r\n");
 
-	printf ("\r\n");
-	
+	for (i4Index = 0; i4Index<4; i4Index++)
+	{
+		val = random()%100;
+		HeapInsert(&heap, val);
+		TraverArry(&heap);
+	}
+
+	for (i4Index = 0; i4Index<u4ArryLen+4; i4Index++)
+	{
+		if (HeapDelRoot(&heap, &val) == false)
+		{
+			printf ("delete failed \r\n");
+		}
+		else
+		{
+			printf ("del val [%d]  index [%d]  total [%d] \r\n", val, i4Index, u4ArryLen+4);
+			TraverArry(&heap);
+		}
+
+	}
 	FreeHeap(&heap) ;
 	return 0;
 }
