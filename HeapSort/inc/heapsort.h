@@ -17,7 +17,6 @@ struct Heap
 	u4 *u4Arry;
 	u4 u4HeapSize;
 	u4 u4ArrySize;
-	int i4Index;
 };
 typedef struct Heap tHeap;
 

@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 	tHeap heap;
 	u4 i4Index  = 0;
 	u4 u4Seed 	= 0;
-	u4 u4ArryLen = 16;
+	u4 u4ArryLen = 10;
 	u4 val = 0;
 
 	srandom(random());
@@ -23,17 +23,18 @@ int main(int argc, char *argv[])
 		printf ("[%d]",heap.u4Arry[i4Index]);
 	}
 	printf ("\r\n ################## \r\n");
-	BuildHeap(&heap);
-	TraverArry(&heap);
+	BuildHeap (&heap);
+	TraverArry (&heap);
 	printf ("\r\n ################## \r\n");
 
-	for (i4Index = 0; i4Index<4; i4Index++)
+#if 1
+	for (i4Index = 0; i4Index<20; i4Index++)
 	{
 		val = random()%100;
 		HeapInsert(&heap, val);
+		printf ("Insert Val [%d] \r\n", val);
 		TraverArry(&heap);
 	}
-
 	for (i4Index = 0; i4Index<u4ArryLen+4; i4Index++)
 	{
 		if (HeapDelRoot(&heap, &val) == false)
@@ -47,6 +48,7 @@ int main(int argc, char *argv[])
 		}
 
 	}
+#endif
 	FreeHeap(&heap) ;
 	return 0;
 }
