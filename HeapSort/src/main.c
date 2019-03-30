@@ -20,21 +20,22 @@ int main(int argc, char *argv[])
 	for (i4Index = 0; i4Index<u4ArryLen; i4Index++)
 	{
 		heap.u4Arry[i4Index] = random() % 40;
-		printf ("[%d]",heap.u4Arry[i4Index]);
+		// printf ("[%d]",heap.u4Arry[i4Index]);
 	}
-	printf ("\r\n ################## \r\n");
+	// printf ("\r\n ################## \r\n");
 	BuildHeap (&heap);
-	TraverArry (&heap);
-	printf ("\r\n ################## \r\n");
+	// TraverArry (&heap);
+	// printf ("\r\n ################## \r\n");
 
-#if 1
 	for (i4Index = 0; i4Index<20; i4Index++)
 	{
 		val = random()%100;
 		HeapInsert(&heap, val);
-		printf ("Insert Val [%d] \r\n", val);
-		TraverArry(&heap);
+	//	printf ("Insert Val [%d] \r\n", val);
+	//	TraverArry(&heap);
 	}
+#if 1
+	TraverArry(&heap);
 	for (i4Index = 0; i4Index<u4ArryLen+4; i4Index++)
 	{
 		if (HeapDelRoot(&heap, &val) == false)

@@ -78,9 +78,9 @@ bool MallocHeap(tHeap *heap, u4 len)
 
 bool HeapInsert(tHeap *heap, u32 val)
 {
-	if (heap->u4HeapSize+1 > heap->u4ArrySize)
+	if (heap->u4HeapSize >= heap->u4ArrySize)
 	{
-		printf ("total [%d] \r\n", heap->u4ArrySize+STEPSIZE);
+		//printf ("total [%d] \r\n", heap->u4ArrySize+STEPSIZE);
 
 		heap->u4Arry = (u4*)realloc(heap->u4Arry, heap->u4HeapSize*4+STEPSIZE*4);
 		if (heap->u4Arry == NULL)
@@ -93,10 +93,21 @@ bool HeapInsert(tHeap *heap, u32 val)
 	}		
 
 	u4 u4ParentIndex = 0;
-	heap->u4Arry[heap->u4HeapSize] = val;
-	u4ParentIndex = (heap->u4HeapSize-1)/2 ;
-	Heapify(heap, u4ParentIndex);
+	u4 u4CurrIndex   = heap->u4HeapSize - 1;
+
+	heap->u4Arry[u4CurrIndex+1] = val;
+	u4ParentIndex = (u4CurrIndex)/2 ;
+
+#if 0
+	printf ("p index [%d] , Insert Index [%d] \r\n",\
+			u4ParentIndex, u4CurrIndex);
+#endif
+
 	heap->u4HeapSize += 1;
+	BuildHeap(heap);
+#if 0
+	Heapify(heap, u4ParentIndex);
+#endif
 
 	return true;
 }
@@ -108,7 +119,8 @@ bool HeapDelRoot(tHeap *heap, u4 *val)
 		*val = heap->u4Arry[0];
 		heap->u4Arry[0] = heap->u4Arry[heap->u4HeapSize-1];
 		heap->u4HeapSize -= 1;
-		Heapify(heap, 0);
+	//	Heapify(heap, 0);
+		BuildHeap(heap);
 		return true;
 	}
 	else
