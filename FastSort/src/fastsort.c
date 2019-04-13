@@ -33,8 +33,14 @@ void FastSort(u4 *arry, u4 start, u4 end)
 	if (start < end)
 	{
 		u4 u4Device = parttion(arry, start, end);
-		FastSort(arry, start, u4Device-1);
-		FastSort(arry, u4Device + 1, end);
+		if (u4Device != 0 )
+		{
+			FastSort(arry, start, u4Device-1);
+		}
+		if (u4Device != end )
+		{
+			FastSort(arry, u4Device + 1, end);
+		}
 	}
 }
 

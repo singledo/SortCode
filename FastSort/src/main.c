@@ -1,12 +1,17 @@
 #include "fastsort.h"
-#define LEN (20)
-
 
 int main(int argc, char *argv[])
 {
 	printf ("fast sort programe ..... \r\n");
+	u4 LEN = 0;
 
 	u4 *arry = (u4*)malloc(sizeof(u4)*LEN);
+	struct timespec time;
+	clock_gettime(CLOCK_REALTIME, &time);
+	printf ("ns [%ld] \r\n", time.tv_nsec);
+	srand(time.tv_nsec);
+	LEN = rand() % 50;
+
 	if (arry == NULL)
 	{
 		printf ("malloc failed \r\n");

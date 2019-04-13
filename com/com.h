@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <time.h>
 
 typedef unsigned int	u32;
 typedef unsigned short 	u16;
