@@ -1,11 +1,11 @@
 #include "fastsort.h"
-
 #define LEN (20)
 
 
 int main(int argc, char *argv[])
 {
 	printf ("fast sort programe ..... \r\n");
+
 	u4 *arry = (u4*)malloc(sizeof(u4)*LEN);
 	if (arry == NULL)
 	{
@@ -18,7 +18,10 @@ int main(int argc, char *argv[])
 	{
 		*(arry+i) = random() % 50;
 	}
-	FastSort(arry, 1, LEN);
+	/*swap((u4*)arry, (u4*)(arry+1));*/
+
+	FastSort(arry, 0, LEN-1);
 	FastArryTraver(arry, LEN);
+
 	return 0;
 }
