@@ -16,4 +16,10 @@ typedef unsigned int	u4;
 typedef unsigned short 	u2;
 typedef unsigned char 	u1;
 
+#define __F __FUNCTION__
+#define __L  __LINE__
+
+void RandomArry(u4 *arry, u4 len, u32 MaxVal);
+void ShowArry(u4 *arry, u32 len);
+
 #endif /* end of com_h*/
