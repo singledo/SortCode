@@ -18,4 +18,4 @@ $(tar): $(obj)
 	$(cc) $(cflag) $(inc) -o $@ -c $<
 
 clean:
-	-rm src/*.o $(tar)
+	-rm  $(tar)
