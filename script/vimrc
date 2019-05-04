@@ -1,0 +1,232 @@
+filetype off                  " required
+set nu 
+set tabstop=4
+
+set guioptions-=r 
+set guioptions-=L
+set guioptions-=b
+set showtabline=0
+set guifont=Monaco:h13         
+set background=dark     "设置背景色"
+set nowrap  "设置不折行"
+set fileformat=unix "设置以unix的格式保存文件"
+
+set showmatch   "显示匹配的括号"
+set scrolloff=5     "距离顶部和底部5行"
+set laststatus=2    "命令行为两行"
+set fenc=utf-8      "文件编码"
+set backspace=2
+set selection=exclusive
+set selectmode=mouse,key
+set matchtime=5
+set ignorecase      "忽略大小写"
+set incsearch
+set hlsearch        "高亮搜索项"
+set whichwrap+=<,>,h,l
+set autoread
+set directory=~/vimswap
+
+let g:solarized_termcolors=256  "solarized主题设置在终端下的设置"
+let g:molokai_original = 1
+let g:rehash256 = 1
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
+syntax on 
+set hlsearch
+" set hlsearch term=reverse ctermfg=236 ctermbg=229 guifg=#303030 guibg=#ffffaf
+
+function RunPython()
+    let mp = &makeprg
+    let ef = &errorformat
+    let exeFile = expand("%:t")
+    setlocal makeprg=python\ -u
+    set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+    silent make %
+    " copen
+    let &makeprg = mp
+    let &errorformat = ef
+endfunction
+
+" cscope setting 
+if has("cscope")
+  set csprg=/usr/bin/cscope
+  set csto=1
+  set cst
+  set nocsverb
+  " add any database in current directory
+  " let CscopePath=$(PROJ_ROOT_PATH)
+  " echo $CSCOPEDATABASE
+  if filereadable($CSCOPEDATABASE)
+      cs add $CSCOPEDATABASE
+  endif
+  execute "cd" $CODEPATH
+  set csverb
+ " set cscopequickfix=c-,d-,e-,g-,i-,s-,t- "在quickfix窗口查看
+endif
+
+" move 
+map <c-l> <c-w>l
+map <c-k> <c-w>k
+map <c-j> <c-w>j
+map <c-h> <c-w>h
+" heighlight
+
+colorscheme 1989
+
+" file explore 
+map <C-n> :NERDTreeToggle<CR>
+" taglist 
+nmap <C-f> :TagbarToggle<CR>
+
+map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+
+" snip config
+let g:UltiSnipsSnippetDirectories=["UltiSnips","./Snippets/C.snippets","./Snippets/lua.snippets"]
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_compltion = ['<alt-q>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<alt-a>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<alt-z>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
+set foldmethod=indent
+set foldlevel=99
+
+let g:ctrlp_max_height = 15
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackhighlight = 1
+let g:ack_qhandler = "botright copen 15"
+let g:ack_autoclose = 1
+let g:ack_use_cword_for_empty_search = 1
+let g:ack_use_dispatch=0
+
+" Ack setting 
+let mapleader=","
+nmap <leader>r : execute "Ack " .expand('<cword>') ." -i " ."./ --cc --cpp --asm --lua" <CR><CR>
+nmap <leader>o :copen <CR>
+nmap <leader>c :cclose <CR>
+nnoremap <leader>n : cnext <CR>
+nnoremap <leader>l : cprev <CR>
+
+set cul
+highlight CursorLine   cterm=NONE ctermbg=blue ctermfg=NONE guibg=NONE guifg=NONE
+
+"C Call Tree 
+let CCTreeEnhancedSymbolProcessing = 1
+
+
+set updatetime=100
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = 'xx'
+let g:gitgutter_sign_removed = '--'
+let g:gitgutter_sign_removed_first_line = '^^'
+let g:gitgutter_sign_modified_removed = '=='
+
+set list
+highlight RedundantSpaces ctermbg=red guibg=red
+
+" set list listchars=tab:|,nbsp:∙,trail:∙,extends:▶,precedes:◀
+" set listchars+=prespace:.
+" let &showbreak = '↳'
+set list listchars=tab:▷\ ,nbsp:]
+
+" match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
+set ts=8
+set noexpandtab
+
+if exists("&autoread")
+	set autoread
+endif
+let autosave=30
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tomasr/molokai'
+Plugin 'tpope/vim-surround'
+Plugin 'pangloss/vim-javascript'
+" add to .vimrc
+Plugin 'flazz/vim-colorschemes'
+
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'Lokaltog/vim-powerline'
+" Plugin 'Yggdroot/indentLine'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tell-k/vim-autopep8'
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'davidhalter/jedi-vim'
+
+Plugin 'mileszs/ack.vim'
+Plugin 'BurntSushi/ripgrep.git'
+Plugin 'hari-rangarajan/CCTree'
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+" Plugin 'vim-scripts/ShowMarks.git'
+Bundle 'gabrielelana/vim-markdown'
+Bundle 'ervandew/supertab' 
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+
+" set cindent     "设置C样式的缩进格式"
+" filetype plugin on
+"set autoindent
+" set smartindent
+set tabstop=4   "设置table长度"
+set shiftwidth=4        "同上"
+set cindent
+set cinoptions=:0,l1,t0,g0,+10,(0,+s    " Linux Kernel CodingStyle
+set cursorline
+set completeopt=longest,menuone
+hi comment ctermfg=2
+highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
