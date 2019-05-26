@@ -11,11 +11,11 @@
 
 void NodeInit(STree *root)
 {
-	root->p = NULL;
-	root->l = NULL;
-	root->r = NULL;
-	root->key = DEFAULT_KEY;
-	root->data = NULL;
+    root->p = NULL;
+    root->l = NULL;
+    root->r = NULL;
+    root->key = DEFAULT_KEY;
+    root->data = NULL;
 }
 
 /* function: SearchTree_CreateNode
@@ -36,15 +36,41 @@ STreeNode * SearchTree_CreateNode(KeyT key, SateT data)
     {
         return NULL;
     }
-	STreeNode  *new = (STreeNode *)malloc(sizeof(STreeNode));
-	if (new == NULL)
-	{
-		return NULL;
-	}
-	NodeInit(new);
-	new->key = key;
-	new->data = data;
-	return new;
+    STreeNode  *new = (STreeNode *)malloc(sizeof(STreeNode));
+    if (new == NULL)
+    {
+    	return NULL;
+    }
+    memset(new, 0, sizeof(STreeNode));
+    NodeInit(new);
+    new->key = key;
+    new->data = data;
+    return new;
+}
+
+/* function:
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
+
+void SearchTree_FreeNode(STreeNode **node)
+{
+    if (*node == NULL)
+    {
+        return;
+    }
+    if ( (*node)->data != NULL)
+    {
+        free( (*node)->data);
+    }
+    free(*node);
+    *node = NULL;
 }
 
 /* function: SearchTree_Insert
@@ -115,9 +141,184 @@ bool SearchTree_Insert(STree *tree, STreeNode *new)
     return true;
 }
 
-void SearchTree_Delete(STree *tree, KeyT val)
-{
+/* function:
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
 
+bool SearchTree_Delete(STree *tree, KeyT val)
+{
+    STreeNode *dest_node = SearchTree_Search(tree, val);
+    STreeNode *p = NULL;
+
+    if (dest_node == NULL)
+    {
+        /*not find the special node in tree*/
+        return false;
+    }
+    if (dest_node->r == NULL && dest_node->l == NULL)
+    {
+
+        if (tree == dest_node)  
+        {
+            tree->key = DEFAULT_KEY;
+            if (tree->data != NULL)
+            {
+                free (tree->data);
+            }
+            return true;
+        }
+        else
+        {
+            p = dest_node->p;
+            if (p->r == dest_node)
+            {
+                p->r = NULL;
+            }
+            else
+            {
+                p->l = NULL;
+            }
+            if (dest_node->data != NULL)
+            {
+                free (dest_node->data);
+            }
+            free(dest_node);
+        }
+    }
+    else if (dest_node->l == NULL || dest_node->r == NULL)
+    {
+
+        if (tree == dest_node)
+        {
+            STreeNode * new_root = NULL;
+            if (tree->l == NULL)
+            {
+                new_root = tree->r;
+            }
+            else
+            {
+                new_root = tree->l;
+            }
+            if (tree->data != NULL)
+            {
+                free(tree->data);
+            }
+            tree->key   = new_root->key;
+            tree->data  = new_root->data;
+            tree->l     = new_root->l;
+            tree->r     = new_root->r;
+            if (new_root->l != NULL)
+            {
+                new_root->l->p = tree;
+            }
+            if (new_root->r != NULL)
+            {
+                new_root->r->p = tree;
+            }
+            free(new_root);
+            return true;
+        }
+        else
+        {
+            p = dest_node->p;
+            if (dest_node == p->l)
+            {
+                if (dest_node->r == NULL)
+                {
+                    p->l = dest_node->l;
+                    dest_node->l->p = p;
+                }
+                else
+                {
+                    p->l = dest_node->r;
+                    dest_node->r->p = p;
+                }
+            }
+            else
+            {
+                if (dest_node->r == NULL)
+                {
+                    p->r = dest_node->l;
+                    dest_node->l->p = p;
+                }
+                else
+                {
+                    p->r = dest_node->r;
+                    dest_node->r->p = p;
+                }
+            }
+        }
+        if (dest_node->data != NULL)
+        {
+            free(dest_node->data);
+        }
+        free(dest_node);
+    }
+    else
+    {
+
+        STreeNode *successor_node = SearchTree_Seecssor(tree, dest_node);
+        STreeNode temp_node ;
+        
+        memset(&temp_node, 0, sizeof(temp_node));
+        STreeNode *temp = NULL;
+        if (successor_node == NULL)
+        {
+
+            /*routine should not run in here*/
+            return false;
+        }
+        else
+        {
+
+            /*the successor node must in dest_node's right sub tree*/
+            /*and the seccessor node have no left children */
+            temp = successor_node->p;
+
+            printf ("[1] temp poninter \r\n");
+            printf ("p [%08x] cur [%08x] l [%08x] r [%08x] \r\n", \
+                    (u4)temp->p, (u4)temp, (u4)temp->l, \
+                    (u4)temp->r);
+
+            printf ("successor  poninter \r\n");
+            printf ("p [%08x] cur [%08x] l [%08x] r [%08x] \r\n", \
+                    (u4)successor_node->p, (u4)successor_node, (u4)successor_node->l, \
+                    (u4)successor_node->r);
+
+            memcpy(&temp_node, successor_node, sizeof(STreeNode));
+            /*delete the successor node */
+            if (temp->r == successor_node)
+            {
+                temp->r = successor_node->r;
+            }
+            else
+            {
+                temp->l = successor_node->r;
+            }
+
+            if (successor_node->r != NULL)
+            {
+                successor_node->r->p = temp;
+            }
+            if (dest_node->data != NULL)
+            {
+                free(dest_node->data);
+            }
+            free(successor_node);
+
+            
+            dest_node->key = temp_node.key;
+            dest_node->data = temp_node.data;
+        }
+    }
+	return true;
 }
 
 /* function: SearchTree_Search
@@ -215,7 +416,6 @@ STreeNode * SearchTree_Maxinum(STree *tree)
         pNodeNext = pNodeNext->r;
     }
     return pNodePre;
-
 }
 
 /* function:     Preorder
@@ -233,7 +433,8 @@ void Preorder(STree *tree)
 {
     if (tree != NULL)
     {
-        printf ("[%d]  ", tree->key);
+        printf ("[%d]   p [%08x] cur [%08x] l [%08x] r [%08x] \r\n", \
+                tree->key, (u4)tree->p, (u4)tree, (u4)tree->l, (u4)tree->r);
         Preorder(tree->l);
         Preorder(tree->r);
     }
@@ -281,14 +482,72 @@ void Inorder(STree *tree)
     }
 }
 
+/* function: SearchTree_Seecssor   
+ *
+ * description: find the seccessor node
+ *
+ * input:  tree - destion tree 
+ *         node - current node
+ *
+ * output: None
+ *
+ * return: successor node pointer
+ */
 
 STreeNode * SearchTree_Seecssor(STree *tree, STreeNode *node)
 {
-
+    if (node == NULL)
+    {
+        return NULL;
+    }
+    if (node->r != NULL)
+    {
+        return SearchTree_Mininum(node->r);
+    }
+    else
+    {
+        STreeNode *p = node->p;
+        STreeNode *temp = node;
+        while (p!=NULL && p->r==temp)
+        {
+            temp = p;
+            p    = p->p;
+        }
+        return p;
+    }
 }
 
+/* function: 
+ *
+ * description: find the predecessor node
+ *
+ * input:  tree - destion tree 
+ *         node - current node
+ *
+ * output: None
+ *
+ * return: predecessor node pointer
+ */
 
 STreeNode * SearchTree_Predecessor(STree *tree, STreeNode *node)
 {
-
+    if (node == NULL)
+    {
+        return NULL;
+    }
+    if (node->l != NULL)
+    {
+        return SearchTree_Maxinum(node->l);
+    }
+    else
+    {
+        STreeNode * p =  node->p;
+        STreeNode * temp = node;
+        while (p!=NULL && temp == p->l)
+        {
+            temp = p;
+            p    = p->p;
+        }
+        return p;
+    }
 }

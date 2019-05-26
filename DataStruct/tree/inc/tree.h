@@ -21,9 +21,18 @@ void NodeInit(STree *root);
 STreeNode* SearchTree_Search(STree *tree, KeyT val);
 bool SearchTree_Insert(STree *tree, STreeNode *new);
 STreeNode * SearchTree_Mininum(STree *tree);
+STreeNode * SearchTree_Maxinum(STree *tree);
 void Preorder(STree *tree);
 void Postorder(STree *tree);
 void Inorder(STree *tree);
 STreeNode * SearchTree_CreateNode(KeyT key, SateT data);
+
+bool SearchTree_Delete(STree *tree, KeyT val);
+void SearchTree_FreeNode(STreeNode **node);
+
+STreeNode * SearchTree_Seecssor(STree *tree, STreeNode *node);
+
+STreeNode * SearchTree_Predecessor(STree *tree, STreeNode *node);
+
 #endif
 
