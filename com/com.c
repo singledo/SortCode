@@ -50,3 +50,49 @@ void ShowArry(u4 *arry, u32 len)
 		printf ("\r\n###### end ######\r\n");
 	}
 }
+
+void debug(const char *fmt, ...)
+{
+    printf("[%s],[%d]\n",__FUNCTION__,__LINE__);
+    va_list va_arg;
+    char *str = NULL;
+    int  _i4 = 0;
+
+    char *_fmt = fmt;
+    u4   _len  = strlen(_fmt);
+    u4   _index = 0;
+
+    va_start(va_arg, *fmt);
+
+    while (_index < _len)
+    {
+        if (*(_fmt + _index) == '%')
+        {
+            switch (*(_fmt + _index + 1))
+            {
+            case 'd':
+                _i4 = va_arg(va_arg, int);
+                printf ("%d", _i4);
+                break;
+            case 's':
+                str = va_arg(va_arg, char *);
+                printf ("%s", str);
+                str = NULL;
+                break;
+            case 'f':
+                break;
+            default:
+                printf ("%c", *(_fmt + _index));
+                break;
+            }
+            _index += 1;
+        }
+        else
+        {
+            printf ("%c", *(_fmt + _index));
+        }
+        _index += 1;
+    }
+
+    va_end (va_arg);
+}

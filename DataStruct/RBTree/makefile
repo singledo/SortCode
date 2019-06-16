@@ -1,5 +1,5 @@
 cc=gcc
-cflag=-g
+cflag=-g -O2 -w
 inc=-I ../../com \
 	-I inc/
 

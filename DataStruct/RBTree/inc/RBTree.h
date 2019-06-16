@@ -42,9 +42,23 @@ typedef struct RBTreeNode RBTree;
 }
 
 
+
 RBNode * RBTree_NewNode(KeyT key, ColorT color, DataT data);
+
 void RBTreeInit(RBTree *tree);
+
 bool VaildNode(RBNode *node);
+
+bool RBTree_Search(const RBTree const **tree, RBNode *src, RBNode **dest);
+
+bool RBTreeIsExit(const RBTree const **tree, RBNode *src);
+
+void LeftRotate(RBTree **tree, RBNode *pivot);
+
+void RightRotate(RBTree **tree, RBNode *pivot);
+
+bool RBTreeInsert(RBTree **root, RBNode *new);
+
 void RBTreeInsFix(RBTree **tree, RBNode *node);
 
 #endif

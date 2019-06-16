@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <time.h>
+#include <stdarg.h>
 
 typedef unsigned int	u32;
 typedef unsigned short 	u16;
@@ -24,5 +25,7 @@ typedef unsigned long ul;
 void RandomArry(u4 *arry, u4 len, u32 MaxVal);
 void ShowArry(u4 *arry, u32 len);
 u4 RandomLen(u4 maxlen);
+
+#define DEBUG(fmt, ...) debug(fmt, ##__VA_ARGS__)
 
 #endif /* end of com_h*/

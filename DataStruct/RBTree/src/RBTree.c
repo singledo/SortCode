@@ -159,36 +159,124 @@ bool RBTreeIsExit(const RBTree const **tree, RBNode *src)
 }
 
 
-/* function:
+/* function: LeftRotate
  *
  * description:
  *
- * input:
+ * input: tree - root node of the tree
+ *        pivot - 
  *
- * output:
+ * output: none
  *
- * return:
+ * return: none
  */
 
 void LeftRotate(RBTree **tree, RBNode *pivot)
 {
-
+	/*                  x                                         x
+	 *                  |                                         | 
+	 *                pivot                                       Y
+	 *             /        \     ============>             /        \
+	 *            X          Y                           pivot        y-r
+	 *          /   \      /   \                      /         \
+	 *        x-l   x-r  y-l   y-r                   X           y-l
+     *                                             /    \
+     *                                           x-l    x-r
+	 * */           
+    if (tree == NULL || pivot == NULL)
+    {
+        printf("[%s],[%d]\n",__FUNCTION__,__LINE__);
+        printf ("input Error \r\n");
+        return;
+    }
+    RBNode *l = pivot->l;
+    RBNode *r = pivot->r;
+    RBNode *p = pivot->p;
+    
+    if (r != NULL)
+    {
+        pivot->r = r->l;
+        if (r->l==NULL)
+        {
+            r->l->p=pivot;
+        }
+    }
+    if (p == NULL)
+    {
+        *tree = r;
+    }
+    else
+    {
+        if (pivot == p->l)
+        {
+            p->l = r;
+        }
+        else
+        {
+            p->r = r;
+        }
+        r->p = p;
+    }
 }
 
-/* function:
+/* function: RightRotate
  *
- * description:
+ * description: right rotate by the pivot node
  *
- * input:
+ * input: tree - root node of the tree
+ *        pivot - pivot node
  *
- * output:
- *
- * return:
+ * output: none
+ 
+ * return: none
  */
 
 void RightRotate(RBTree **tree, RBNode *pivot)
 {
+    /*                  x                           x 
+     *                  |                           |
+     *                pivot                         X
+     *             /        \                   /      \
+     *            X          Y    ==>>        x-l     pivot
+     *          /   \      /   \                     /      \
+     *        x-l   x-r  y-l   y-r                 x-r       Y
+     *                                                    /     \
+     *                                                  y-l      y-r
+     */
 
+    if (tree == NULL || pivot == NULL)
+    {
+        printf("[%s],[%d]\n",__FUNCTION__,__LINE__);
+        printf ("input Error \r\n");
+        return;
+    }
+    RBNode *l = pivot->l;
+    RBNode *r = pivot->r;
+    RBNode *p = pivot->p;
+    if (l != NULL)
+    {
+        pivot->l = l->r;
+        if (l->r != NULL)
+        {
+            l->r->p = pivot;
+        }
+    }
+    if (p != NULL)
+    {
+        if (pivot == p->l)
+        {
+            p->l = l;
+        }
+        else
+        {
+            p->r = l;
+        }
+        l->p = p;
+    }
+    else
+    {
+        *tree = l;
+    }
 }
 
 /* function: RBTreeInsert
@@ -341,7 +429,8 @@ void RBTreeInsFix(RBTree **tree, RBNode *node)
 	 *                                 z-R                     un-B
 	 * */
 	RBNode *z = node;
-	RBNode *pa = *gr = *un = NULL;
+	RBNode *pa, *gr, *un;
+	pa = gr = un = NULL;
 
 	/*two layer case, z->p is the root node, so
 	 * not go to the while inside */
@@ -369,7 +458,7 @@ void RBTreeInsFix(RBTree **tree, RBNode *node)
 		    /*case 3: z is the left children node*/
 			pa->color = RED;
 			gr->color = BLACK;
-			RightRotate(root, gr);
+			RightRotate(tree, gr);
 		}
 		else
 		{
@@ -379,7 +468,7 @@ void RBTreeInsFix(RBTree **tree, RBNode *node)
 			{
 				un->color = BLACK;
 				pa->color = BLACK;
-				ga->color = RED;
+				gr->color = RED;
 				z = gr;
 			}
 			/*case 5 */
@@ -389,20 +478,100 @@ void RBTreeInsFix(RBTree **tree, RBNode *node)
 				LeftRotate(tree, z);
 			}
 			pa->color = RED;
-			gr->color = BLACk;
+			gr->color = BLACK;
 			LeftRotate(tree, gr);
 		}
 	}
 }
 
+/* function: RBTreeSuccessor
+ *
+ * description: find the next bigger node
+ *
+ * input: root - root node
+ *        node - specified node
+ *
+ * output: none
+ *
+ * return: destnation
+ *
+ */
+
 RBNode* RBTreeSuccessor(RBTree *root, RBNode *node)
 {
+    if (root == NULL || node == NULL)
+    {
+        return NULL;
+    }
 
+    if (RBTreeIsExit(&root, node) == false)
+    {
+        return NULL;
+    }
+
+    if (node->r == NULL)
+    {
+        RBNode *p = node->p;
+        RBNode *curr = node;
+        while (p != NULL && curr == p->r)
+        {
+            curr = p;
+            p   = p->p;
+        }
+    }
+    else
+    {
+        RBNode *next = NULL;
+        RBNode *pre  = NULL;
+
+        pre  = node->r;   
+        next = node->r;
+        while (next != NULL)
+        {
+            pre = next;
+            next = next->l;
+        }
+        return pre;
+    }
 }
+
+/* function:  RBTreeDelete
+ *
+ * description: delete a node from the tree
+ *
+ * input: root - root node
+ *        node - specified node
+ *
+ * output: none
+ *
+ * return: false  - delete failed 
+ *         true   - delete success
+ *
+ */
 
 bool RBTreeDelete(RBTree **root, RBNode *node)
 {
+    if (root == NULL || node == NULL)
+    {
+        return false;
+    }
+    if (RBTreeIsExit(root, node) == false)
+    {
+        return false;
+    }
+    if (node->l == NULL && node->r == NULL)
+    {
 
+    }
+    else if (node->l == NULL || node->r == NULL)
+    {
+
+    }
+    else
+    {
+
+    }
+    RBTreeDelFix(root, node);
 }
 
 void RBTreeDelFix(RBTree **tree, RBNode *node)
