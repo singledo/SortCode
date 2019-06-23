@@ -158,6 +158,80 @@ bool RBTreeIsExit(const RBTree const **tree, RBNode *src)
 	return false;
 }
 
+/* function:
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
+
+bool RBTreeKeyIsExit(const RBTree *tree, KeyT key)
+{
+	if (tree == NULL)
+	{
+		return false;
+	}
+	RBNode *next = tree;
+	while (next != NULL)
+	{
+		if (key < next->key)
+		{
+			next = next->l;
+		}
+		else if (key == next->key)
+		{
+			return true;
+		}
+		else
+		{
+			next = next->r;
+		}
+	}
+	return false;
+}
+
+/* function: RBTreeKeySearch
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
+
+RBNode * RBTreeKeySearch(const RBTree * tree, KeyT key)
+{
+	if (tree == NULL)
+	{
+		return NULL;
+	}
+	RBNode *next = tree;
+	RBNode *pre  = tree;
+	
+	while (next != NULL)
+	{
+		pre = next;
+		if (key < next->key)
+		{
+			next = next->l;
+		}
+		else if (key == next->key)
+		{
+			return pre;
+		}
+		else 
+		{
+			next = next->r;
+		}
+	}
+	return false;
+}
 
 /* function: LeftRotate
  *
@@ -535,6 +609,80 @@ RBNode* RBTreeSuccessor(RBTree *root, RBNode *node)
     }
 }
 
+/* function:
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
+
+RBNode * RBTreeKeySuccessor(RBTree *tree, KeyT key)
+{
+	if (tree == NULL || RBTreeKeyIsExit(tree, key) == false)
+	{
+		DEBUG("TREE Is Empty Or The Key Not Exit In The Tree \r\n");
+		return NULL;
+	}
+	RBNode *node = RBTreeKeySearch(tree, key);
+	if (node == NULL)
+	{
+		DEBUG("Tree Key Search Failed, key [%d] \r\n", key);
+		return NULL;
+	}
+
+	if (node->r == NULL)
+    {
+        RBNode *p = node->p;
+        RBNode *curr = node;
+        while (p != NULL && curr == p->r)
+        {
+            curr = p;
+            p   = p->p;
+        }
+		return p;
+    }
+    else
+    {
+        RBNode *next = NULL;
+        RBNode *pre  = NULL;
+
+        pre  = node->r;   
+        next = node->r;
+        while (next != NULL)
+        {
+            pre = next;
+            next = next->l;
+        }
+        return pre;
+    }
+}
+
+/* function:
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
+
+bool RBNodeFree(RBNode **node)
+{
+	if (*node == NULL)
+	{
+		return false;
+	}
+	free (*node);
+	*node = NULL;
+	return true;
+}
+
 /* function:  RBTreeDelete
  *
  * description: delete a node from the tree
@@ -549,36 +697,336 @@ RBNode* RBTreeSuccessor(RBTree *root, RBNode *node)
  *
  */
 
-bool RBTreeDelete(RBTree **root, RBNode *node)
+bool RBTreeDelete(RBTree **root, KeyT key)
 {
-    if (root == NULL || node == NULL)
+    if (root == NULL)
     {
+		DEBUG("Input Tree Is NULL \r\n");
         return false;
     }
-    if (RBTreeIsExit(root, node) == false)
+
+	if (RBTreeKeyIsExit(*root, key) == false)
     {
+		DEBUG("Not A Node In The Tree With Specified key [%d] \r\n", key);
         return false;
     }
-    if (node->l == NULL && node->r == NULL)
-    {
 
-    }
-    else if (node->l == NULL || node->r == NULL)
-    {
+	RBNode *target = RBTreeKeySearch(*root, key);
+	RBNode *z = NULL;
+	if (target == NULL)
+	{
+		DEBUG("Find Failed Specifiled Node with key [%d] \r\n", key);
+		return false;
+	}
 
+	RBNode *successor_node = NULL;
+	RBNode *p = target->p;
+	ColorT  del_color = BLACK;
+
+	/*case 1: destination node have no children node */
+	/*              
+	 *              pa                               pa
+	 *           /       \                         /     \
+	 *          Del       l      =====>         NULL      l
+	 * */
+    if (target->l == NULL && target->r == NULL)
+    {
+		/* root node */
+		if (p == NULL)
+		{
+			RBTreeInit(*root);
+		}
+		else
+		{
+			if (target == p->r)
+			{
+				p->r = NULL;
+			}
+			else
+			{
+				p->l = NULL;
+			}
+			del_color = target->color;
+			if (RBNodeFree(&target) == false)
+			{
+				DEBUG("free failed  key [%d] \r\n", key);
+			}
+		}
     }
+
+	/*case 2: one children node */
+	/*          pa                                  pa           
+	 *       /       \                           /       \
+	 *      R         Del               ====>   R         Del-R
+	 *                  \
+	 *                  Del-R
+	 * */
+    else if (target->l == NULL || target->r == NULL)
+    {
+		if (target->l != NULL)
+		{
+			if (target == p->l)
+			{
+				p->l         = target->l;
+				target->l->p = p;
+			}
+			else
+			{
+				p->l         = target->r;
+				target->r->p = p;
+			}
+		}
+		else
+		{
+			if (target == p->l)
+			{
+				p->r         = target->l;
+				target->l->p = p;
+			}
+			else
+			{
+				p->r         = target->r;
+				target->r->p = p;
+			}
+		}
+		del_color = target->color;
+		if (RBNodeFree(&target) == false)
+		{
+			DEBUG("free failed  key [%d] \r\n", key);
+		}
+    }
+
+	/*case 3 : two children node;*/
+	/*                    pa
+	 *                 /        \
+	 *                pa-L      DeL
+	 *                       /       \
+	 *                     Del-L    Del-R
+	 *
+	 * */
     else
     {
-
+		successor_node = RBTreeKeySuccessor(*root, key);
+		if (successor_node == NULL)
+		{
+			DEBUG("Find Successor Node Failed; key [%d] \r\n", key);
+			return false;
+		}
+		p = successor_node->p;
+		if (successor_node == p->l)
+		{
+			p->l = NULL;
+		}
+		else
+		{
+			p->r = NULL;
+		}
+		del_color = target->color;
+		COPYNODEWITHRELEASE(target, successor_node);
     }
-    RBTreeDelFix(root, node);
+	if (del_color == BLACK)
+	{
+    	RBTreeDelFix(root, p);
+	}
 }
 
-void RBTreeDelFix(RBTree **tree, RBNode *node)
+/* function:
+ *
+ * description:
+ *
+ * input:
+ *
+ * output:
+ *
+ * return:
+ */
+
+void RBTreeDelFix(RBTree **tree, RBNode **del)
 {
+	/*left children node*/
+    RBNode *pNode = *del;
+    RBNode *root  = *tree;
+    RBNode *p  = NULL;
+    RBNode *w  = NULL;
+    RBNode *wl = NULL;
+    RBNode *wr = NULL;
 
+    while ( pNode != root && pNode->color == BLACK )
+    {
+        p = pNode->p;
+        w = pNode->r;
+        if (w != NULL)
+        {
+            wl = w->l;
+            wr = w->r;
+        }
+        else
+        {
+            wl = NULL;
+            wr = NULL;
+        }
+
+        if (pNode == pNode->p->l)
+        {
+            /*  case 1: brother node w, w's color is RED
+             *
+             *          step 1: exchange  pa node and W color
+             *          step 2: left rotate with the pa
+             *
+             *            |                                    |            
+             *           pa-B                                 W-B
+             *        /         \                          /       \
+             *      x-B         W-R         =====>>      pa-R      WR-B
+             *                /     \                  /       \
+             *              WL-B   WR-B              X-B      WL-B
+             */
+            if (w->color = RED)
+            {
+                EXCHANGE(p->color, w->color);
+                LeftRotate(&root, p);
+                continue;
+            }
+
+            /*
+             *   case 2: w's color is BLACK, and with two BLACK children
+             *   
+             *           step 1: delete a black (x,w,pa)
+             *           step 2: x move to pa node.
+             *        |                                  |          
+             *       pa-R                               pa-R (nex x)
+             *    /       \                          /       \
+             *  x-B       W-B           ======>>   x-B       W-R
+             *          /     \                            /     \
+             *        WL-B   WR-B                        WL-B   WR-B
+            */
+            else if ( (wl != NULL && wl->color == BLACK) && \
+                      (wr != NULL && wr->color == BLACK))
+            {
+                w->color = RED;
+                pNode = p;
+                continue;
+            }
+            /*
+             *   case 3: w's color is BLACK, left children node's color is RED, right children node's color is black
+             *
+             *            step 1: exchange color between WL and W .
+             *            step 2: right rotate with W
+             *
+             *            |                                       |             
+             *           pa-R                                    pa-R
+             *        /        \                              /        \
+             *      X-B        W-B           =====>>        X-B        WL-B
+             *              /      \                                       \
+             *            WL-R     WR-B                                    W-R
+             *                                                               \
+             *                                                              WR-B
+             */
+            else if (wr != NULL && wr->color == BLACK)
+            {
+                EXCHANGE(wl->color, w->color); 
+                RightRotate(&root, w);
+                continue;
+            }
+            /*
+             *  case 4:  w's color is BLACK, right children's color is RED
+             *
+             *           |                                     |            
+             *          pa-R                                   W-R
+             *       /        \          ========>>         /      \
+             *     X-B        W-B                         pa-B     WR-B
+             *             /      \                     /      \
+             *           WL-R     WR-R                X-B     WL-R
+            */
+            w->color = p->color;
+            p->color = BLACK;   
+            w->r->color = BLACK;
+            LeftRotate(&root, pNode->p);
+            pNode = root;
+        }
+
+        /*right children node*/
+        else
+        {
+            /*  case 5: brother node w, w's color is RED
+             *
+             *          step 1: exchange  pa node and W color
+             *          step 2: right rotate with the pa
+             *
+             *            |                                    |            
+             *           pa-B                                 W-B
+             *        /         \                          /       \
+             *      W-R         X-B         =====>>      WL-B      pa-R
+             *    /     \                                        /      \
+             *  WL-B   WR-B                                    WR-B      X-B
+             */
+            if (w->color = RED)
+            {
+                EXCHANGE(w->color, p->color);
+                RightRotate(&root, p);
+                continue;
+            }
+
+            /*
+             *   case 6: w's color is BLACK, and with two BLACK children
+             *   
+             *           step 1: delete a black (x,w,pa)
+             *           step 2: x move to pa node.
+             *
+             *            |                                  |          
+             *           pa-R                               pa-R (nex x)
+             *        /       \                          /       \
+             *      W-B       X-B           ======>>   W-R       X-B
+             *    /     \                            /     \
+             *  WL-B   WR-B                        WL-B   WR-B           
+             */
+            else if ( (wl != NULL && wl->color == BLACK) && \
+                      (wr != NULL && wr->color == BLACK))
+            {
+                w->color = RED;
+                pNode = p;
+                continue;
+            }
+             /*
+             *   case 7: w's color is BLACK, left children node's color is RED, 
+             *   left children node's color is black
+             *
+             *            step 1: exchange color between WR and W .
+             *            step 2: right rotate with W
+             *
+             *            |                                       |             
+             *           pa-R                                    pa-R
+             *        /        \                              /        \
+             *      W-B        X-B           =====>>        WR-B       X-B
+             *    /      \                                /
+             *  WL-B     WR-R                           W-R
+             *                                          /
+             *                                        WL-B        
+             */
+
+            else if (wr != NULL && wl->color == BLACK)
+            {
+                EXCHANGE(w->color, wr->color);
+                LeftRotate(&root, w);
+                continue;
+            }
+             /*
+             *  case 8:  w's color is RED, right children's color is RED
+             *
+             *               |                                     |       
+             *              pa-R                                  X-B     
+             *           /        \          ========>>        /       \
+             *         X-B        W-B                        WL-R    pa-R
+             *      /      \                                       /      \
+             *     WL-R     WR-R                                 WR-R     W-B
+             */
+            w->color = p->color;
+            p->color = BLACK;   
+            w->l->color = BLACK;
+            RightRotate(&root, pNode->p);
+            pNode = root;
+        }
+    }
+    pNode->color = BLACK;
 }
-
-
 
 

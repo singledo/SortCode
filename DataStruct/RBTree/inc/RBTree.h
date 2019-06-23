@@ -41,6 +41,13 @@ typedef struct RBTreeNode RBTree;
 	free (node2); \
 }
 
+#define EXCHANGE(pEx1, pEx2) \
+{\
+	u4 temp = pEx1;\
+	pEx1 = pEx2; \
+	pEx2 = temp; \
+}
+
 
 
 RBNode * RBTree_NewNode(KeyT key, ColorT color, DataT data);
@@ -60,5 +67,15 @@ void RightRotate(RBTree **tree, RBNode *pivot);
 bool RBTreeInsert(RBTree **root, RBNode *new);
 
 void RBTreeInsFix(RBTree **tree, RBNode *node);
+
+bool RBTreeKeyIsExit(const RBTree *tree, KeyT key);
+
+RBNode * RBTreeKeySearch(const RBTree * tree, KeyT key);
+
+bool RBNodeFree(RBNode **node);
+
+RBNode * RBTreeKeySuccessor(RBTree *tree, KeyT key);
+
+void RBTreeDelFix(RBTree **tree, RBNode **node);
 
 #endif
