@@ -53,7 +53,6 @@ void ShowArry(u4 *arry, u32 len)
 
 void debug(const char *fmt, ...)
 {
-    printf("[%s],[%d]\n",__FUNCTION__,__LINE__);
     va_list va_arg;
     char *str = NULL;
     int  _i4 = 0;
