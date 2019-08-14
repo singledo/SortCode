@@ -57,7 +57,7 @@ void debug(const char *fmt, ...)
     char *str = NULL;
     int  _i4 = 0;
 
-    char *_fmt = fmt;
+    const char *_fmt = fmt;
     u4   _len  = strlen(_fmt);
     u4   _index = 0;
 
