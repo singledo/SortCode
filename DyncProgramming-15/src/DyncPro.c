@@ -71,7 +71,7 @@ u4 CalculateTimes (u4 *pSou, u4 u4Start, u4 u4Middle, u4 u4End)
     }
     assert (!(u4Middle<u4Start || u4Middle > u4End));
 
-    u4 u4HeadTime = 0, u4TailTime = 0, u4Merger;
+    u4 u4HeadTime = 0, u4TailTime = 0, u4Merger = 0;
     u4 i = 0, j = 0;
     u4 u4Multi = 0, u4Add = 0;
     u4 *pArry1 = NULL, *pArry2 = NULL;
@@ -105,6 +105,7 @@ u4 CalculateTimes (u4 *pSou, u4 u4Start, u4 u4Middle, u4 u4End)
                   (*(pSou + u4Middle*2) * *(pSou + u4Middle*2) - 1);
         u4Merger = u4Multi + u4Add;
     }
+/*printf ("head [%d] tail [%d] merger [%d] \r\n",u4HeadTime, u4TailTime, u4Merger);*/
     return u4HeadTime + u4TailTime + u4Merger;
 }
 
@@ -115,11 +116,12 @@ u4 CalculateTimes (u4 *pSou, u4 u4Start, u4 u4Middle, u4 u4End)
  *  Output        :
  *  Returns       :
  ****************************************************/
-void DyncProgramming (u4 *pSou, u4 u4SouRow, u4 *pRes, u4 u4DesRow)
+void DyncProgramming (u4 *pSou, u4 u4SouRow, u4 *pRes, u4 *pDivRes ,u4 u4DesRow)
 {
     /*ShowMatrix (pSou, 2, u4SouRow);*/
     u4 i = 0, j = 0, k = 0;
     u4 u4CalTimes = 0, u4LeastTime = 0;
+    u4 u4Div = 0;
     
     memset (pRes, 0, sizeof(u4)*u4DesRow*u4DesRow);
     for (i=0; i<u4DesRow; i++)
@@ -134,20 +136,62 @@ void DyncProgramming (u4 *pSou, u4 u4SouRow, u4 *pRes, u4 u4DesRow)
             k = i;
             u4CalTimes   = 0;
             u4LeastTime  = CalculateTimes (pSou, i, k, j);
+            u4Div = k;
             k += 1;
-
             while (k<j)
             {
                 u4CalTimes = CalculateTimes (pSou, i, k, j);        
                 if (u4CalTimes < u4LeastTime)
                 {
                     u4LeastTime = u4CalTimes;
+                    u4Div = k;
                 }
                 k += 1;
             }
-            *(pRes + j*u4DesRow + i) = u4LeastTime;
+            *(pRes + i*u4DesRow + j) = u4LeastTime;
+            *(pDivRes + i*u4DesRow + j) = u4Div;
         }           
     }
     ShowMatrix (pRes, u4DesRow, u4DesRow);
+    ShowMatrix (pDivRes, u4DesRow, u4DesRow);
 }
 
+/****************************************************
+ *  Function Name :
+ *  Description   :
+ *  Input         :
+ *  Output        :
+ *  Returns       :
+ ****************************************************/
+void ShorestPath (u4 *pSou,u4 *pArry, u4 *pDivArry, u4 u4Start, u4 u4End, u4 u4Col)
+{
+    if (u4End - u4Start <= 1)
+    {
+
+    }
+    else
+    {
+        u4 u4Devision = 0;
+        u4 u4MinStep  = 0;
+        u4 u4MinIndex = 0;
+        u4 i = 0;
+        
+        u4MinStep = *(pArry + u4Start*u4Col + u4Start);
+        u4MinIndex = u4Start;
+        for (i=u4Start; i<u4End; i++)
+        {
+            if (u4MinStep > *(pArry + u4Start*u4Col + u4Start + i))
+            {
+                u4MinStep = *(pArry + u4Start*u4Col + u4Start + i);
+                u4MinIndex = u4Start + i;
+            }
+        }
+        u4Devision = *(pDivArry + u4Start*u4Col + u4MinIndex);
+        
+        printf ("( ");
+        ShorestPath (pSou, pArry, pDivArry, u4Start, u4Devision, u4Col);
+        printf ("[%d %d] )", *(pSou + u4Devision), *(pSou+u4Devision+1));
+        printf ("( ");
+        ShorestPath (pSou, pArry, pDivArry, u4Devision+1, u4End, u4Col);
+    }
+}
