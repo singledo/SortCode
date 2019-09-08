@@ -1,0 +1,141 @@
+#!/usr/bin/python
+
+import  os
+import sys 
+
+icore_br = {"dev_soarrtk",   "dev_cypress_apresia",   "dev_cypress"}
+cus_br   ={"master_soarrtk", "master_cypress_apresia", "master_cypress"}
+
+
+def GetBranch(dir):
+    os.chdir (dir)
+    cmd = os.popen("git branch -v")
+    all_br  = cmd.read()
+    cmd.close()
+    
+    br_list = all_br.split ("\n") 
+    cur_br = ""
+    for str in br_list:
+        _br_list = str.split(' ')
+        if _br_list[0] == '*':
+            cur_br = _br_list[1] 
+    return cur_br
+
+def GetCusAndIcore():
+    _root = os.getenv('PROJ_ROOT_PATH')
+    _cus_dir   = _root +"/core/code/customer/trendnet" 
+    _icore_dir = _root + "/core/code/future"
+    _cur_dir   = os.path.abspath ("./")
+    '''
+    print ("customer direction : " + _cus_dir)
+    print ("icore direction    : " +_icore_dir)
+    '''
+    cur_br = {} 
+    cur_icore_br = GetBranch(_icore_dir)   
+    cur_cus_br   = GetBranch(_cus_dir)   
+    cur_br['cus']   = cur_cus_br 
+    cur_br['icore'] = cur_icore_br
+    os.chdir (_cur_dir)
+    return cur_br
+
+def Divison():
+    cur_br = GetCusAndIcore()
+    _sync_br_icore = []
+    _sync_br_cus   = []
+    _sync          = {}
+    
+    for _br in icore_br:
+        if _br != cur_br['icore']:
+            _sync_br_icore.append (_br)
+
+    for _br in cus_br:
+        if _br != cur_br['cus']:
+            _sync_br_cus.append(_br)
+
+    _sync['icore'] = _sync_br_icore
+    _sync['cus']   = _sync_br_cus
+    return cur_br, _sync
+
+def SyncDiff (commit=None, type="icore"):
+    _root = os.getenv('PROJ_ROOT_PATH')
+    _cus_dir   = _root +"/core/code/customer/trendnet" 
+    _icore_dir = _root + "/core/code/future"
+    _cur_dir   = os.path.abspath ("./")
+   
+    sync_br = {}
+    cur_br  = {}
+    cur_br, sync_br = Divison()
+    
+    if type == 'icore':
+        os.chdir (_icore_dir)
+
+        for _br in sync_br['icore']:
+            cmd = os.popen ("git checkout %s"%(_br))
+            cmd_read = cmd.read()
+            if cmd.close() != None:
+                print ("[Checkout Exec Error] [%s] "%(_br))
+                return 
+
+            cmd = os.popen ("git pull")
+            cmd_read = cmd.read()
+            if cmd.close() != None:
+                print ("[pull Exec Error] [%s] "%(_br))
+                return 
+
+            cmd = os.popen ("git cherry-pick %s"%(commit))
+            cmd_read = cmd.read()
+            if cmd.close() != None:
+                print ("[cherry-pick Exec Error] [%s] [%s]"%(_icore_dir, _br))
+                return 
+
+        cmd = os.popen ("git checkout %s"%(cur_br['icore']))
+        cmd_read = cmd.read()
+        if cmd.close() != None:
+            print ("[Checkout Exec Error] [%s] "%(_icore_dir))
+            return 
+
+    elif type == 'cus':
+        os.chdir (_cus_dir)
+        
+        print (sync_br['cus'])
+
+        for _br in sync_br['cus']:
+            cmd = os.popen ("git checkout %s"%(_br))
+            cmd_read = cmd.read()
+            if cmd.close() != None:
+                print ("[Checkout Exec Error] [%s] "%(_br))
+                return 
+
+            cmd = os.popen ("git pull")
+            cmd_read = cmd.read()
+            if cmd.close() != None:
+                print ("[pull Exec Error] [%s] "%(_br))
+                return 
+
+            cmd = os.popen ("git cherry-pick %s"%(commit))
+            cmd_read = cmd.read()
+            if cmd.close() != None:
+                print ("[cherry-pick Exec Error] [%s] [%s]"%(_icore_dir, _br))
+                return 
+
+        cmd = os.popen ("git checkout %s"%(cur_br['cus']))
+        cmd_read = cmd.read()
+        if cmd.close() != None:
+            print ("[Checkout Exec Error] [%s] "%(cur_br['cus']))
+            return 
+
+    else:
+        print ("[Type Error] [%s] "%(type))
+
+if __name__ == "__main__":
+    argv_len = len(sys.argv)
+    if argv_len != 3:
+        print ("./sync <commit id> <type(icore/cus)>")
+
+    else:
+        commit = sys.argv[1]
+        type   = sys.argv[2]
+        
+        if commit == None or type == None :
+            print ("./sync <commit id> <type(icore/cus)>")
+        SyncDiff (commit, type)
