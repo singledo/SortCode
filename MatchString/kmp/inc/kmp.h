@@ -3,4 +3,6 @@
 
 #include "StrCom.h"
 
+char * KMP_MatchString (char *pTarget, char *pPattern);
+
 #endif
