@@ -1,0 +1,45 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+D	./com/com.h	31;"	d
+DEBUG	./com/com.h	37;"	d
+InfixOrder	./TreeMirror/src/TreeMirror.c	/^void InfixOrder (Tree *root)$/;"	f
+KeyReset	./482/main.c	/^void KeyReset (char *pIn, u32 InLen, char *pOut, u32 k)$/;"	f
+Preorder	./TreeMirror/src/TreeMirror.c	/^void Preorder(Tree *root)$/;"	f
+RandomArry	./com/com.c	/^void RandomArry(u4 *arry, u4 len, u32 MaxVal)$/;"	f
+RandomLen	./com/com.c	/^u4 RandomLen(u4 maxlen)$/;"	f
+ShowArry	./com/com.c	/^void ShowArry(u4 *arry, u32 len)$/;"	f
+Tree	./TreeMirror/inc/TreeMirror.h	/^struct Tree$/;"	s
+Tree	./TreeMirror/inc/TreeMirror.h	/^typedef struct Tree Tree;$/;"	t	typeref:struct:Tree
+UPPER	./482/main.c	10;"	d	file:
+_TreeMirror_h	./TreeMirror/inc/TreeMirror.h	2;"	d
+__F	./com/com.h	24;"	d
+__L	./com/com.h	25;"	d
+_com_h	./com/com.h	2;"	d
+cc	./TreeMirror/makefile	/^cc=gcc$/;"	m
+cflag	./TreeMirror/makefile	/^cflag=-g$/;"	m
+debug	./com/com.c	/^void debug(const char *fmt, ...)$/;"	f
+inc	./TreeMirror/makefile	/^inc = -I ..\/com \\$/;"	m
+l	./TreeMirror/inc/TreeMirror.h	/^	struct Tree *l;$/;"	m	struct:Tree	typeref:struct:Tree::Tree
+licenseKeyFormatting	./482/main.c	/^char * licenseKeyFormatting(char * S, int K)$/;"	f
+main	./482/main.c	/^int main (int argc, char *argv[])$/;"	f
+main	./TreeMirror/src/main.c	/^int main (int argc, char *argv[])$/;"	f
+obj	./TreeMirror/makefile	/^obj=$(src:.o=.c)$/;"	m
+p	./TreeMirror/inc/TreeMirror.h	/^	struct Tree *p,$/;"	m	struct:Tree	typeref:struct:Tree::Tree
+r	./TreeMirror/inc/TreeMirror.h	/^	struct Tree *r;$/;"	m	struct:Tree	typeref:struct:Tree::Tree
+src	./TreeMirror/makefile	/^src = .\/src\/main.c \\$/;"	m
+tar	./TreeMirror/makefile	/^tar = TreeMirror$/;"	m
+u1	./com/com.h	/^typedef unsigned char 	u1;$/;"	t
+u16	./482/main.c	/^typedef unsigned short u16;$/;"	t	file:
+u16	./com/com.h	/^typedef unsigned short 	u16;$/;"	t
+u2	./com/com.h	/^typedef unsigned short 	u2;$/;"	t
+u32	./482/main.c	/^typedef unsigned int   u32;$/;"	t	file:
+u32	./com/com.h	/^typedef unsigned int	u32;$/;"	t
+u4	./com/com.h	/^typedef unsigned int	u4;$/;"	t
+u8	./482/main.c	/^typedef unsigned char  u8;$/;"	t	file:
+u8	./com/com.h	/^typedef unsigned char 	u8;$/;"	t
+ul	./com/com.h	/^typedef unsigned long ul;$/;"	t
+ull	./com/com.h	/^typedef unsigned long long ull;$/;"	t
