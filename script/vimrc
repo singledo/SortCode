@@ -1,19 +1,12 @@
 filetype off                  " required
-set nu 
-set tabstop=4
 
-set guioptions-=r 
-set guioptions-=L
-set guioptions-=b
-set showtabline=0
+" show line number
+set nu  
 set guifont=Monaco:h13         
-set background=dark     "设置背景色"
-set nowrap  "设置不折行"
-set fileformat=unix "设置以unix的格式保存文件"
-
-set showmatch   "显示匹配的括号"
-set scrolloff=5     "距离顶部和底部5行"
-set laststatus=2    "命令行为两行"
+set nowrap
+set fileformat=unix 
+set showmatch
+set scrolloff=5
 set fenc=utf-8      "文件编码"
 set backspace=2
 set selection=exclusive
@@ -31,44 +24,18 @@ let g:molokai_original = 1
 let g:rehash256 = 1
 
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
-augroup END
-
-syntax on 
-set hlsearch
-" set hlsearch term=reverse ctermfg=236 ctermbg=229 guifg=#303030 guibg=#ffffaf
-
-function RunPython()
-    let mp = &makeprg
-    let ef = &errorformat
-    let exeFile = expand("%:t")
-    setlocal makeprg=python\ -u
-    set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-    silent make %
-    " copen
-    let &makeprg = mp
-    let &errorformat = ef
-endfunction
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " cscope setting 
 if has("cscope")
-  set csprg=/usr/bin/cscope
-  set csto=1
-  set cst
-  set nocsverb
-  " add any database in current directory
-  " let CscopePath=$(PROJ_ROOT_PATH)
-  " echo $CSCOPEDATABASE
-  if filereadable($CSCOPEDATABASE)
-      cs add $CSCOPEDATABASE
-  endif
-  execute "cd" $CODEPATH
-  set csverb
- " set cscopequickfix=c-,d-,e-,g-,i-,s-,t- "在quickfix窗口查看
+	set csprg=/usr/bin/cscope
+	set csto=0
+	set cst
+	set nocsverb
+	if filereadable("cscope.out")
+		cs add cscope.out
+	endif
+	set csverb
 endif
 
 " move 
@@ -76,9 +43,8 @@ map <c-l> <c-w>l
 map <c-k> <c-w>k
 map <c-j> <c-w>j
 map <c-h> <c-w>h
-" heighlight
 
-colorscheme 1989
+colorscheme zenburn
 
 " file explore 
 map <C-n> :NERDTreeToggle<CR>
@@ -91,12 +57,54 @@ map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 let g:UltiSnipsSnippetDirectories=["UltiSnips","./Snippets/C.snippets","./Snippets/lua.snippets"]
 
 " make YCM compatible with UltiSnips (using supertab)
+nmap <C-q>: <C-v>
+
 let g:ycm_key_list_select_compltion = ['<alt-q>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<alt-a>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<alt-z>'
+" #####YouCompleteMe Configure   
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  
+" 自动补全配置  
+set completeopt=longest,menu
+"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)  
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"离开插入模式后自动关闭预览窗口  
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+"回车即选中当前项  
+"上下左右键的行为 会显示其他信息  
+"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"  
+"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"  
+"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :
+"\<PageDown>"  
+"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" :
+"\<PageUp>"  
+  
+"youcompleteme  默认tab  s-tab 和自动补全冲突  
+"let g:ycm_key_list_select_completion=['<c-n>']  
+let g:ycm_key_list_select_completion = ['<Down>']  
+"let g:ycm_key_list_previous_completion=['<c-p>']  
+let g:ycm_key_list_previous_completion = ['<Up>']  
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示  
 
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<c-e>"
+let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎  
+let g:ycm_min_num_of_chars_for_completion=2 "
+let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项  
+let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全  
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+"force recomile with syntastic  
+"nnoremap <leader>lo :lopen<CR> "open locationlist  
+"nnoremap <leader>lc :lclose<CR>    "close locationlist  
+inoremap <leader><leader> <C-x><C-o>  
+"在注释输入中也能补全  
+let g:ycm_complete_in_comments = 1  
+"在字符串输入中也能补全  
+let g:ycm_complete_in_strings = 1  
+"注释和字符串中的文字也会被收入补全  
+let g:ycm_collect_identifiers_from_comments_and_strings = 0  
+let g:clang_user_options='|| exit 0'  
+
+let g:ycm_python_binary_path = '/usr/bin/python2.7'
+
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
@@ -104,8 +112,16 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 set foldmethod=indent
 set foldlevel=99
 
+" for file search
 let g:ctrlp_max_height = 15
 
+" for ack search
+let mapleader=","
+nmap <leader>r : execute "Ack " .expand('<cword>') ." -i " ."./ --cc --cpp --asm --lua" <CR><CR>
+nmap <leader>o :copen <CR>
+nmap <leader>c :cclose <CR>
+nnoremap <leader>n : cnext <CR>
+nnoremap <leader>l : cprev <CR>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ackhighlight = 1
 let g:ack_qhandler = "botright copen 15"
@@ -113,90 +129,53 @@ let g:ack_autoclose = 1
 let g:ack_use_cword_for_empty_search = 1
 let g:ack_use_dispatch=0
 
-" Ack setting 
-let mapleader=","
-nmap <leader>r : execute "Ack " .expand('<cword>') ." -i " ."./ --cc --cpp --asm --lua" <CR><CR>
-nmap <leader>o :copen <CR>
-nmap <leader>c :cclose <CR>
-nnoremap <leader>n : cnext <CR>
-nnoremap <leader>l : cprev <CR>
-
+" current line and config the color
 set cul
 highlight CursorLine   cterm=NONE ctermbg=blue ctermfg=NONE guibg=NONE guifg=NONE
 
-"C Call Tree 
-let CCTreeEnhancedSymbolProcessing = 1
-
-
-set updatetime=100
-if exists('&signcolumn')  " Vim 7.4.2201
-  set signcolumn=yes
+" don't know the effect
+if exists('&signcolumn')  " Vim 7.4.2201 
+    set signcolumn=yes 
 else
   let g:gitgutter_sign_column_always = 1
 endif
 
+" write file to disk
+set updatetime=10
+
+" for git operator flag
 let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = 'xx'
 let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = '=='
 
-set list
-highlight RedundantSpaces ctermbg=red guibg=red
-
-" set list listchars=tab:|,nbsp:∙,trail:∙,extends:▶,precedes:◀
-" set listchars+=prespace:.
-" let &showbreak = '↳'
-set list listchars=tab:▷\ ,nbsp:]
-
-" match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
-set ts=8
-set noexpandtab
-
+" for have been deleted file
 if exists("&autoread")
-	set autoread
+    set autoread
 endif
-let autosave=30
 
+" a tab convert to 8 space
+set ts=8 
+
+" bottom is plugin install 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
-Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-surround'
-Plugin 'pangloss/vim-javascript'
-" add to .vimrc
 Plugin 'flazz/vim-colorschemes'
-
-Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
 Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-
 Plugin 'Lokaltog/vim-powerline'
-" Plugin 'Yggdroot/indentLine'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'tell-k/vim-autopep8'
 Plugin 'scrooloose/nerdcommenter'
-
-Plugin 'davidhalter/jedi-vim'
-
 Plugin 'mileszs/ack.vim'
-Plugin 'BurntSushi/ripgrep.git'
-Plugin 'hari-rangarajan/CCTree'
-
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
-" Plugin 'vim-scripts/ShowMarks.git'
 Bundle 'gabrielelana/vim-markdown'
 Bundle 'ervandew/supertab' 
 
@@ -204,23 +183,6 @@ Bundle 'ervandew/supertab'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-
-" set cindent     "设置C样式的缩进格式"
-" filetype plugin on
-"set autoindent
-" set smartindent
-set tabstop=4   "设置table长度"
-set shiftwidth=4        "同上"
-set cindent
-set cinoptions=:0,l1,t0,g0,+10,(0,+s    " Linux Kernel CodingStyle
-set cursorline
-set completeopt=longest,menuone
-hi comment ctermfg=2
-highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
-
-" autocmd FileType python set omnifunc=pythoncomplete#Complete
-
-
 "
 " Brief help
 " :PluginList       - lists configured plugins
