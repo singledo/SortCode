@@ -60,4 +60,18 @@ vpn()
 	sudo  /home/z/workspace/bin/clash/clash-linux-amd64 -d /home/z/workspace/bin/clash
 }
 
+AcquirePrefix()
+{
+	data=$(</home/z/workspace/bin/pre.cfg)
+	#return $data
+	echo $data
+}
+
+AndPre()
+{
+	echo $1/ > /home/z/workspace/bin/pre.cfg
+	source ~/.bashrc
+}
+
+
 
