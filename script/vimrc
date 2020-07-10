@@ -1,188 +1,263 @@
 filetype off                  " required
+set nu 
+set tabstop=4
 
-" show line number
-set nu  
+set guioptions-=r 
+set guioptions-=L
+set guioptions-=b
+set showtabline=0
 set guifont=Monaco:h13         
-set nowrap
-set fileformat=unix 
-set showmatch
-set scrolloff=5
+set background=dark     "设置背景色"
+set nowrap  "设置不折行"
+set fileformat=unix "设置以unix的格式保存文件"
+
+set showmatch   "显示匹配的括号"
+set scrolloff=5     "距离顶部和底部5行"
+set laststatus=2    "命令行为两行"
 set fenc=utf-8      "文件编码"
 set backspace=2
 set selection=exclusive
 set selectmode=mouse,key
 set matchtime=5
 set ignorecase      "忽略大小写"
-set incsearch
 set hlsearch        "高亮搜索项"
 set whichwrap+=<,>,h,l
 set autoread
 set directory=~/vimswap
+set tags=tags
 
 let g:solarized_termcolors=256  "solarized主题设置在终端下的设置"
 let g:molokai_original = 1
 let g:rehash256 = 1
+let g:UltiSnipsUsePythonVersion = 3
 
 autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" cscope setting 
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
+syntax on 
+set hlsearch
+
 if has("cscope")
 	set csprg=/usr/bin/cscope
 	set csto=0
+	"find cscope db prior
 	set cst
+	" use cstags
 	set nocsverb
+	" add any database in current directory
 	if filereadable("cscope.out")
 		cs add cscope.out
+		" else add database pointed to by environment
+	elseif $CSCOPE_DB != ""
+		cs add $CSCOPE_DB
 	endif
 	set csverb
 endif
+
 
 " move 
 map <c-l> <c-w>l
 map <c-k> <c-w>k
 map <c-j> <c-w>j
 map <c-h> <c-w>h
+" heighlight
+colorscheme 1989
 
-colorscheme zenburn
 
 " file explore 
 map <C-n> :NERDTreeToggle<CR>
 " taglist 
 nmap <C-f> :TagbarToggle<CR>
-
 map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
-
 " snip config
 let g:UltiSnipsSnippetDirectories=["UltiSnips","./Snippets/C.snippets","./Snippets/lua.snippets"]
-
-" make YCM compatible with UltiSnips (using supertab)
-nmap <C-q>: <C-v>
-
-let g:ycm_key_list_select_compltion = ['<alt-q>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<alt-a>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<alt-z>'
-" #####YouCompleteMe Configure   
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  
-" 自动补全配置  
-set completeopt=longest,menu
-"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)  
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"离开插入模式后自动关闭预览窗口  
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-"回车即选中当前项  
-"上下左右键的行为 会显示其他信息  
-"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"  
-"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"  
-"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" :
-"\<PageDown>"  
-"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" :
-"\<PageUp>"  
-  
-"youcompleteme  默认tab  s-tab 和自动补全冲突  
-"let g:ycm_key_list_select_completion=['<c-n>']  
-let g:ycm_key_list_select_completion = ['<Down>']  
-"let g:ycm_key_list_previous_completion=['<c-p>']  
-let g:ycm_key_list_previous_completion = ['<Up>']  
-let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示  
-
-let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎  
-let g:ycm_min_num_of_chars_for_completion=2 "
-let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项  
-let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全  
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-"force recomile with syntastic  
-"nnoremap <leader>lo :lopen<CR> "open locationlist  
-"nnoremap <leader>lc :lclose<CR>    "close locationlist  
-inoremap <leader><leader> <C-x><C-o>  
-"在注释输入中也能补全  
-let g:ycm_complete_in_comments = 1  
-"在字符串输入中也能补全  
-let g:ycm_complete_in_strings = 1  
-"注释和字符串中的文字也会被收入补全  
-let g:ycm_collect_identifiers_from_comments_and_strings = 0  
-let g:clang_user_options='|| exit 0'  
-
-let g:ycm_python_binary_path = '/usr/bin/python2.7'
-
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-
 set foldmethod=indent
 set foldlevel=99
-
-" for file search
 let g:ctrlp_max_height = 15
 
-" for ack search
-let mapleader=","
-nmap <leader>r : execute "Ack " .expand('<cword>') ." -i " ."./ --cc --cpp --asm --lua" <CR><CR>
-nmap <leader>o :copen <CR>
-nmap <leader>c :cclose <CR>
-nnoremap <leader>n : cnext <CR>
-nnoremap <leader>l : cprev <CR>
-let g:ackprg = 'ag --nogroup --nocolor --column'
-let g:ackhighlight = 1
-let g:ack_qhandler = "botright copen 15"
-let g:ack_autoclose = 1
-let g:ack_use_cword_for_empty_search = 1
-let g:ack_use_dispatch=0
+"C Call Tree 
+let CCTreeEnhancedSymbolProcessing = 1
 
-" current line and config the color
-set cul
-highlight CursorLine   cterm=NONE ctermbg=blue ctermfg=NONE guibg=NONE guifg=NONE
-
-" don't know the effect
-if exists('&signcolumn')  " Vim 7.4.2201 
-    set signcolumn=yes 
+set updatetime=100
+if exists('&signcolumn')  " Vim 7.4.2201
+    set signcolumn=yes
 else
-  let g:gitgutter_sign_column_always = 1
+    let g:gitgutter_sign_column_always = 1
 endif
 
-" write file to disk
-set updatetime=10
-
-" for git operator flag
 let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = 'xx'
 let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = '=='
 
-" for have been deleted file
-if exists("&autoread")
-    set autoread
-endif
+set list
+highlight RedundantSpaces ctermbg=red guibg=red
+set list listchars=tab:▷\ ,nbsp:]
 
-" a tab convert to 8 space
-set ts=8 
+function PRINT()
+    call append(line("."), "printf(\"[%s],[%d]\\n\",__FUNCTION__,__LINE__);")
+endfunction
 
-" bottom is plugin install 
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_compltion = ['<alt-q>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<alt-a>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<alt-z>'
+let g:ycm_key_invoke_completion = '<c-space>'
+"自动开启语义补全
+
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+set completeopt=menu,menuone
+
+noremap <c-z> <NOP>
+
+let g:ycm_semantic_triggers =  {
+            \   'c' : [],
+            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+            \   'lua' : [],
+            \ }
+
+let g:ycm_seed_identifiers_with_syntax = 0
+
+"highlight Search ctermbg=yellow ctermfg=black 
+"highlight IncSearch ctermbg=black ctermfg=yellow 
+highlight MatchParen cterm=underline ctermbg=NONE ctermfg=NONE
+set incsearch
+
+
+nnoremap <F4> : nohl <CR>
+nnoremap <F2> : set clipboard=unnamed <CR>
+nnoremap <F3> : set clipboard^=unnamed,unnamedplus <CR>
+nmap <F5> : call PRINT() <cr>
+
+nmap <silent> <F6> <Plug>MarkdownPreview        " for normal mode
+imap <silent> <F6> <Plug>MarkdownPreview        " for insert mode
+nmap <silent> <F7> <Plug>StopMarkdownPreview    " for normal mode
+imap <silent> <F7> <Plug>StopMarkdownPreview    " for insert mode
+
+let mapleader=","
+
+" insert image in vim
+autocmd FileType markdown nmap <buffer><silent> <leader>i :call mdip#MarkdownClipboardImage()<CR>
+let g:mdip_imgdir = '.'
+let g:mdip_imgname = 'Image'
+
+" Ack setting 
+nmap <leader>r : execute "Ack " .expand('<cword>') ." -i " ."./ --cc --cpp --asm --lua" <CR><CR>
+nmap <leader>o :copen <CR>
+nmap <leader>c :cclose <CR>
+nnoremap <leader>n : cnext <CR>
+nnoremap <leader>l : cprev <CR>
+
+" for markdown 
+" let g:vim_markdown_folding_level = 6
+" let g:vim_markdown_toc_autofit = 1
+"au BufRead,BufNewFile *.md colorscheme OceanicNext
+
+let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+let g:pydiction_menu_height = 20
+
+set cursorline
+let g:ctrlp_map = '<c-p>' 
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$' 
+
+
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-surround'
+Plugin 'pangloss/vim-javascript'
+" add to .vimrc
 Plugin 'flazz/vim-colorschemes'
+
+" Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
 Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
 Plugin 'Lokaltog/vim-powerline'
+" Plugin 'Yggdroot/indentLine'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tell-k/vim-autopep8'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'mileszs/ack.vim'
+
+" Plugin 'davidhalter/jedi-vim'
+"Plugin 'mileszs/ack.vim'
+Plugin 'BurntSushi/ripgrep.git'
+" Plugin 'hari-rangarajan/CCTree'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
-Bundle 'gabrielelana/vim-markdown'
 Bundle 'ervandew/supertab' 
+
+" for markdown
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'mzlogin/vim-markdown-toc'
+"Plug 'iamcco/markdown-preview.nvim'
+
+
+" for rearsh word
+Bundle 'mileszs/ack'
+
+" vim mark 
+Bundle "kshenoy/vim-signature.git"
+
+" highlight mark
+" Bundle "inkarkat/vim-mark.git"
+
+
+" for markdown preview
+Bundle 'iamcco/mathjax-support-for-mkdp'
+Plugin 'git@github.com:iamcco/markdown-preview.vim.git'
+
+" install image in vim
+Plugin 'ferrine/md-img-paste.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
+
+set tabstop=4   "设置table长度"
+set shiftwidth=4        "同上"
+set cindent
+set cinoptions=:0,l1,t0,g0,+10,(0,+s    " Linux Kernel CodingStyle
+set completeopt=longest,menuone
+" hi comment ctermfg=2
+
+" autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+
 "
 " Brief help
 " :PluginList       - lists configured plugins
