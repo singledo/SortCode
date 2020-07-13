@@ -145,10 +145,10 @@ nnoremap <F2> : set clipboard=unnamed <CR>
 nnoremap <F3> : set clipboard^=unnamed,unnamedplus <CR>
 nmap <F5> : call PRINT() <cr>
 
-nmap <silent> <F6> <Plug>MarkdownPreview        " for normal mode
-imap <silent> <F6> <Plug>MarkdownPreview        " for insert mode
-nmap <silent> <F7> <Plug>StopMarkdownPreview    " for normal mode
-imap <silent> <F7> <Plug>StopMarkdownPreview    " for insert mode
+nmap <silent> <F6> <Plug>MarkdownPreview
+imap <silent> <F6> <Plug>MarkdownPreview
+nmap <silent> <F7> <Plug>StopMarkdownPreview
+imap <silent> <F7> <Plug>StopMarkdownPreview
 
 let mapleader=","
 
@@ -209,7 +209,6 @@ Plugin 'tell-k/vim-autopep8'
 Plugin 'scrooloose/nerdcommenter'
 
 " Plugin 'davidhalter/jedi-vim'
-"Plugin 'mileszs/ack.vim'
 Plugin 'BurntSushi/ripgrep.git'
 " Plugin 'hari-rangarajan/CCTree'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -225,16 +224,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'mzlogin/vim-markdown-toc'
 "Plug 'iamcco/markdown-preview.nvim'
 
-
-" for rearsh word
-Bundle 'mileszs/ack'
-
 " vim mark 
 Bundle "kshenoy/vim-signature.git"
-
-" highlight mark
-" Bundle "inkarkat/vim-mark.git"
-
 
 " for markdown preview
 Bundle 'iamcco/mathjax-support-for-mkdp'
@@ -242,6 +233,7 @@ Plugin 'git@github.com:iamcco/markdown-preview.vim.git'
 
 " install image in vim
 Plugin 'ferrine/md-img-paste.vim'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
