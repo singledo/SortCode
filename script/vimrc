@@ -69,13 +69,17 @@ map <c-h> <c-w>h
 colorscheme 1989
 
 
+"for nerdtree
+let NERDTreeIgnore=['\.pyc','\~$','\.swp','\.out','tags']
+let NERDTreeShowBookmarks=1
+
 " file explore 
 map <C-n> :NERDTreeToggle<CR>
 " taglist 
 nmap <C-f> :TagbarToggle<CR>
 map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 " snip config
-let g:UltiSnipsSnippetDirectories=["UltiSnips","./Snippets/C.snippets","./Snippets/lua.snippets"]
+let g:UltiSnipsSnippetDirectories=["./Snippets/C.snippets"]
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -134,8 +138,6 @@ let g:ycm_semantic_triggers =  {
 
 let g:ycm_seed_identifiers_with_syntax = 0
 
-"highlight Search ctermbg=yellow ctermfg=black 
-"highlight IncSearch ctermbg=black ctermfg=yellow 
 highlight MatchParen cterm=underline ctermbg=NONE ctermfg=NONE
 set incsearch
 
@@ -234,6 +236,8 @@ Plugin 'git@github.com:iamcco/markdown-preview.vim.git'
 " install image in vim
 Plugin 'ferrine/md-img-paste.vim'
 Plugin 'mileszs/ack.vim'
+
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

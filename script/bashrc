@@ -115,7 +115,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-# alias sl="ssh zhangjun@192.168.10.91"
+
 alias com="sudo minicom -D /dev/ttyUSB0 -b 115200"
 alias x="export TERM=xterm-256color"
 alias nx="export TERM=xterm"
@@ -129,12 +129,31 @@ if [ ! -d ~/bin/func.sh ]; then
 fi
 
 
-alias v=nvim
 alias up="source ~/.bashrc"
+alias sdpenv="source ~/qnx710/qnxsdp-env.sh"
+alias p="cd .."
 
-export PATH=$PATH:/home/z/workspace/bin
+# alias sdp="sudo /opt/qnx660/run-qde.sh"
+# alias aa="source /opt/qnx660/qnx660-env.sh"
 
+#export http_proxy="socks5://127.0.0.1:7891"
+#export https_proxy="socks5://127.0.0.1:7891"
+
+#   export ALL_PROXY=socks5://127.0.0.1:7890
+#   export https_proxy=http://127.0.0.1:7890
+#   export http_proxy=http://127.0.0.1:7890
+#   export all_proxy=socks5://127.0.0.1:7891
+
+export ARMGCC_ROOT=/home/z/workspace/bin/toolchain/scfw-gcc/lib
+export ARMGCC_LIB=${ARMGCC_ROOT}:${ARMGCC_ROOT}/gcc/arm-none-eabi/6.3.1
+
+export PATH=/home/z/workspace/bin/bin:$PATH
+export PATH=/home/z/workspace/bin:$PATH
 export ProjectPre=$(AcquirePrefix)
 export WorkSpace=/home/z/workspace/
+export PATH=${PATH}:${ARMGCC_LIB}
+export ARMGCC_DIR=/home/z/workspace/bin/toolchain/gcc-arm-none-eabi-6-2017-q2-update/
+export REPO_URL='https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/'
 
-tmux 
+tmux
+
