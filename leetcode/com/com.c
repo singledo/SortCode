@@ -4,7 +4,7 @@ void RandomArry(u4 *arry, u4 len, u32 MaxVal)
 {
 	struct timespec time;
 	u4 i = 0;
-	
+
 	if (arry == 0 || len == 0)
 	{
 		printf("[%s] [%d] [input error] \r\n", __FUNCTION__, __LINE__);
@@ -17,6 +17,15 @@ void RandomArry(u4 *arry, u4 len, u32 MaxVal)
 	{
 		*(arry+i) = random()%MaxVal;
 	}
+}
+
+void RandomU8(u8 *val, u8 MaxVal)
+{
+	struct timespec time;
+
+	clock_gettime(CLOCK_REALTIME, &time);
+	srand(time.tv_nsec);
+	*val = random()%MaxVal;
 }
 
 u4 RandomLen(u4 maxlen)
