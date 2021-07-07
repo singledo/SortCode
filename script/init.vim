@@ -25,11 +25,13 @@ set autoread
 set directory=~/vimswap
 set tags=tags
 syntax on
-set cindent
-set autoindent
+" set cindent
+" set autoindent
+" set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 set cinoptions=:0,l1,t0,g0,+10,(0,+s    " Linux Kernel CodingStyle
 set completeopt=longest,menuone
 set ts=4
+set shiftwidth=4
 
 " vim　主题
 colorscheme 1989
@@ -56,7 +58,6 @@ endif
 
 
 
-" set list
 set completeopt=menu,menuone
 
 " 搜索时高亮多个匹配
@@ -126,10 +127,14 @@ let g:ctrlp_max_height = 15
 
 " Plugin 'BurntSushi/ripgrep.git'
 " vim 中集成搜索工具
-nnoremap <Leader>r :CtrlSF  
+nnoremap <Leader>r :CtrlSF<cr>
+nnoremap <Leader>c :CtrlSFClose<cr>
+nnoremap <Leader>o :CtrlSFOpen<cr>
+
+
 let g:ctrlsf_search_mode = 'sync'
 
- 
+
 " Plugin 'MarcWeber/vim-addon-mw-utils'
 " Plugin 'tomtom/tlib_vim'
 " Plugin 'SirVer/ultisnips'
@@ -151,10 +156,20 @@ imap <silent> <F7> <Plug>StopMarkdownPreview
 autocmd FileType markdown nmap <buffer><silent> <leader>i :call mdip#MarkdownClipboardImage()<CR>
 let g:mdip_imgdir = '.'
 let g:mdip_imgname = 'Image'
-
 " tmux 前缀是 c-z
 noremap <c-z> <NOP>
 
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+set list
+set lcs=tab:<.
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -198,6 +213,7 @@ Plugin 'mzlogin/vim-markdown-toc'
 " markdown 预览
 Bundle 'iamcco/mathjax-support-for-mkdp'
 Plugin 'git@github.com:iamcco/markdown-preview.vim.git'
+Plugin 'iamcco/markdown-preview.nvim'
 " install image in vim
 Plugin 'ferrine/md-img-paste.vim'
 " vim 标记
