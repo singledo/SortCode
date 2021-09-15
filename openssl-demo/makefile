@@ -1,0 +1,23 @@
+cc=gcc
+cflag= -g
+lib= -lrt -lssl -lcrypto
+inc= -I ../com \
+	 -I ./inc/
+
+src=./src/hsaeDecrypt.c \
+	./src/hsaeEncrypt.c \
+	./src/hsaeOpensslMain.c
+
+obj=$(src:.o=.c)
+
+tar=demo
+
+$(tar): $(obj)
+	$(cc) $(cflag) $(inc) -o $@ $^ $(lib)
+
+%.o:%.c
+	$(cc) $(cflag) $(inc) -o $@ -c $< $(lib)
+
+clean:
+	-rm src/*.o $(tar)
+
