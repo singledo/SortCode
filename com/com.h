@@ -9,6 +9,7 @@
 #include <time.h>
 #include <stdarg.h>
 #include <assert.h>
+#include <errno.h>
 
 typedef unsigned int	u32;
 typedef unsigned short 	u16;
@@ -28,6 +29,8 @@ void RandomArry(u4 *arry, u4 len, u32 MaxVal);
 void ShowArry(u4 *arry, u32 len);
 u4 RandomLen(u4 maxlen);
 
+void RandomU8(u8 *val, u8 MaxVal);
+
 #define D(fmt, ...) \
 {\
     printf("[%s],[%d]  #### ",__FUNCTION__,__LINE__); \
@@ -39,5 +42,6 @@ u4 RandomLen(u4 maxlen);
     printf("[%s],[%d] #### ",__FUNCTION__,__LINE__); \
 	debug(fmt, ##__VA_ARGS__); \
 }\
+
 
 #endif /* end of com_h*/
