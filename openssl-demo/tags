@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AESPRESIZE	src/hsaeDecrypt.c	73;"	d	file:
+PASSWDLEN	inc/hsaeDecrypt.h	13;"	d
+_hsaeDecrypt_h	inc/hsaeDecrypt.h	2;"	d
+_hsaeEncrypt_h	inc/hsaeEncrypt.h	2;"	d
+aesDecrypt	src/hsaeDecrypt.c	/^bool aesDecrypt (char* inFile, char* keyFile, char* outFile)$/;"	f
+cc	makefile	/^cc=gcc$/;"	m
+cflag	makefile	/^cflag= -g$/;"	m
+fileToKey	src/hsaeDecrypt.c	/^bool fileToKey (char *keyFile, unsigned char *key, unsigned char *iv)$/;"	f
+inc	makefile	/^inc= -I ..\/com \\$/;"	m
+lib	makefile	/^lib= -lrt -lssl -lcrypto$/;"	m
+main	src/hsaeOpensslMain.c	/^int main (int argc, char *argv[])$/;"	f
+obj	makefile	/^obj=$(src:.o=.c)$/;"	m
+src	makefile	/^src=.\/src\/hsaeDecrypt.c \\$/;"	m
+tar	makefile	/^tar=demo$/;"	m

@@ -6,7 +6,6 @@ inc= -I ../com \
 
 src=./src/hsaeDecrypt.c \
 	./src/hsaeEncrypt.c \
-	./src/hsaeMD5.c \
 	./src/hsaeOpensslMain.c
 
 obj=$(src:.o=.c)
@@ -20,5 +19,4 @@ $(tar): $(obj)
 	$(cc) $(cflag) $(inc) -o $@ -c $< $(lib)
 
 clean:
-	-rm src/*.o $(tar)
-
+	-rm src/*.o $(t
