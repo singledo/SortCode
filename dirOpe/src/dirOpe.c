@@ -54,6 +54,12 @@ bool file2File (char *src, char *dst)
 	int srcFd = -1 , dstFd = -1;
 	int nRead = 0, nWrite = 0, nDone = 0;
 	char *pBuf = NULL;
+	mode_t oldMask;
+    mode_t newMask ;
+
+	/*newMask =  S_IRWXU | S_IRWXG | S_IRWXO; [> other read <]*/
+	newMask =  0;
+	oldMask = umask (newMask);
 
 	pBuf = (char *) malloc(COPE_PRESIZE);
 	if (NULL == pBuf) {
@@ -70,7 +76,7 @@ bool file2File (char *src, char *dst)
 	}
 
 	dstFd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, \
-				  S_IRUSR | S_IWUSR| S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+				  S_IRWXU | S_IRWXG | S_IRWXO);
 	if (-1 == dstFd) {
 		return false;
 	}
@@ -96,6 +102,7 @@ bool file2File (char *src, char *dst)
 	free (pBuf);
 	close (srcFd);
 	close (dstFd);
+	umask (oldMask);
 
 	return true;
 }

@@ -30,9 +30,8 @@ int main (int argc, char *argv)
 	}
 #endif
 
-#if 0
-	char srcDir[] = "/home/z/resource/openssl";
-	char dstDir[] = "/home/z/test/dst";
+	char srcDir[] = "/home/z/workspace/Resource/toolchain/gcc-arm-none-eabi-7-2018-q2-update";
+	char dstDir[] = "/home/z/workspace/dirOpeDst";
 	bool bRet = false;
 
 	bRet = dir2Dir (srcDir, dstDir);
@@ -41,7 +40,7 @@ int main (int argc, char *argv)
 	} else {
 		printf ("DIR copy  %s to %s success \n", srcDir, dstDir);
 	}
-#endif
+#if 0
 	char dir[] = "/home/z/test/dst";
 	bool bRet = false;
 
@@ -51,6 +50,7 @@ int main (int argc, char *argv)
 	} else {
 		printf ("del dir [%s] success \n", dir);
 	}
+#endif
 
 
 
