@@ -10,8 +10,11 @@
 
 typedef struct cShmDev cShmDev_t;
 typedef struct bufInfo bufInfo_t;
+typedef struct shmMutex_type shmMutex_t;
 
-#define DEFAULT_OFLAG (O_CREAT | O_RDWR)
+#define W_OFLAG (O_CREAT | O_RDWR)
+#define R_OFLAG (O_RDONLY)
+
 #define DEFAULT_MODE  (S_IRWXU | S_IRWXG | S_IRWXO)
 #define SHMNAME_MAX (255)
 
@@ -23,6 +26,12 @@ typedef struct bufInfo bufInfo_t;
 
 typedef enum
 {
+    HSAE_SHM_W=0,
+    HSAE_SHM_R,
+}SHM_TYPE;
+
+typedef enum
+{
     CSHM_IDEL = 0,
     CSHM_W,
     CSHM_R,
@@ -30,33 +39,31 @@ typedef enum
 
 struct bufInfo
 {
-    /*start index*/
+    bool is_full;
     int s_index;
-    /*end index*/
     int e_index;
     int max_index;
+    unsigned char* buf_addr;
+};
+
+struct shmMutex_type
+{
+    pthread_mutex_t mutex;
+    pthread_mutexattr_t mutex_attr;
 };
 
 struct cShmDev
 {
     SHM_ST state;
-    bool is_full; /*false->not full, true->buf is full with data*/
-    /*name for share memory*/
     char name[SHMNAME_MAX];
-    /*O_RDONLY, O_WRONLY ... */
-    int oflag;
-    /*The permission bits */
-    mode_t mode;
     /*shm_open return*/
     int shm_fd;
     /*for read and write*/
-    pthread_mutex_t mutex;
+    shmMutex_t shm_mutex;
 
     int buf_len;  /*buf's len*/
     int buf_soff; /*start offset of buf */
-    char * map_addr; /*map address*/
-    char * buf_addr; /* keep receive data*/
-
+    unsigned char* map_addr; /*map address*/
     int shm_len; /*share memory's len*/
 
     bufInfo_t buf_info;
@@ -68,6 +75,16 @@ struct cShmDev
  *  |_____________________|----------------------------------|
  * */
 
-int cShmWriteVaild (cShmDev_t* p_dev);
+
+int cShmDevLen_w (cShmDev_t *p_dev);
+int cShmDevLen_r (cShmDev_t *p_dev);
+
+cShmDev_t* cShmDevOpen (char *name, SHM_TYPE type);
+
+int cShmRead (cShmDev_t* p_dev, unsigned char *buf, int len);
+
+int cShmWrite (cShmDev_t* p_dev,unsigned char *buf, int len);
+
+void cShmDevClose (cShmDev_t *p_dev);
 
 #endif
