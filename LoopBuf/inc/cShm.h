@@ -69,6 +69,13 @@ struct cShmDev
     bufInfo_t buf_info;
 };
 
+typedef struct cShmOff cShmOff_t;
+struct cShmOff
+{
+    char name[SHMNAME_MAX];
+    unsigned int off;
+};
+
 /*
  *  share memory distribution
  *  |<-- data struct   -->|<------ buffer for data --------->|

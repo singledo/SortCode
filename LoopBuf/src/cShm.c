@@ -1,4 +1,5 @@
 #include "cShm.h"
+#include "HsaeShm.h"
 
 /*
  * By zhangjun on 22.02.22.
@@ -49,7 +50,7 @@ static int cShmWriteVaild (bufInfo_t *p_info)
          * */
         v_len = (p_info->s_index - p_info->e_index);
     }
-#if 1
+#if 0
     if (0 != v_len)
     {
         printf ("w2-s:%d e:%d v:%d \n", \
@@ -117,6 +118,7 @@ static int cShmReadVaild (bufInfo_t *p_info)
         v_len = (p_info->max_index-p_info->s_index + 1) +\
                 (p_info->e_index);
     }
+#if 0
     if (0 != v_len)
     {
         printf ("r2-s:%d e:%d v:%d \n", p_info->s_index, p_info->e_index, v_len);
@@ -125,9 +127,15 @@ static int cShmReadVaild (bufInfo_t *p_info)
     {
 
     }
+#endif
     return v_len;
 }
 
+static cShmOff_t cshm_off[] = {
+    { SHM_RS485_R2,  0x0,},
+    { SHM_RS232_R2,  0x1024*6+1,},
+    { SHM_RS232_R3,  0x1024*12+1,},
+};
 
 /*
  * By zhangjun on 18.02.22.
@@ -154,16 +162,21 @@ cShmDev_t* cShmDevOpen (char *name, SHM_TYPE type)
     shmMutex_t *p_shm_mutex = NULL;
     int i_ret = 0;
     bufInfo_t *p_info = NULL;
+    int port_flag = 0;
+
+    printf ("arg: [name:%s t:%d] \n", name, type);
 
     if (HSAE_SHM_R == type)
     {
         shm_oflag = O_RDWR;
+        port_flag = PROT_READ | PROT_WRITE;
         shm_mode = 0666;
     }
     else if (HSAE_SHM_W == type)
     {
         shm_unlink (name);
         shm_oflag = O_CREAT | O_RDWR;
+        port_flag = PROT_READ | PROT_WRITE;
         shm_mode = 0777;
     }
     else
@@ -184,6 +197,7 @@ cShmDev_t* cShmDevOpen (char *name, SHM_TYPE type)
     shm_len = STRUCT_SIZE+SHMMEM_SIZE;
     if (HSAE_SHM_R == type)
     {
+#if 0
         if (-1 == ftruncate(shm_fd, shm_len))
         {
             printf ("[%s@%d] [%s]\n", __FUNCTION__, __LINE__, strerror (errno));
@@ -193,6 +207,7 @@ cShmDev_t* cShmDevOpen (char *name, SHM_TYPE type)
         else
         {
         }
+#endif
     }
     else if (HSAE_SHM_W == type)
     {
@@ -207,17 +222,18 @@ cShmDev_t* cShmDevOpen (char *name, SHM_TYPE type)
         }
     }
 
-    map_addr = (unsigned char *)mmap (NULL, shm_len,\
-                                      PROT_READ | PROT_WRITE,\
+    map_addr = (unsigned char *)mmap (NULL, shm_len, port_flag,\
                                       MAP_SHARED, shm_fd, 0);
     if (MAP_FAILED == map_addr)
     {
         printf ("[%s@%d] [%s]\n", __FUNCTION__, __LINE__, strerror (errno));
+        printf ("[name:%s][map: 0x%x] [fd: %d] \n", name, (unsigned int)map_addr, shm_fd);
         close (shm_fd);
         return NULL;
     }
     else
     {
+        printf ("[name:%s][map: 0x%x] [fd: %d] \n", name, (unsigned int)map_addr, shm_fd);
     }
     if (HSAE_SHM_R == type)
     {
@@ -358,6 +374,10 @@ int cShmWrite (cShmDev_t* p_dev,unsigned char *buf, int len)
         nr_write = wv_len;
     }
 
+    printf ("w-1:[name:%s] [%d~%d] [0x%x] \n", p_dev->name,\
+            p_info->s_index, p_info->e_index, \
+            *(p_info->buf_addr + p_info->e_index-1));
+
     if (p_info->s_index <= p_info->e_index)
     {
         /*        s    e
@@ -387,6 +407,11 @@ int cShmWrite (cShmDev_t* p_dev,unsigned char *buf, int len)
         memcpy ((p_info->buf_addr + p_info->e_index), buf, nr_write);
         p_info->e_index += nr_write;
     }
+
+    printf ("w-2: [%d~%d] [0x%x] \n", p_info->s_index, p_info->e_index, \
+            *(p_info->buf_addr + p_info->e_index-1));
+    printf ("w-3: [0x%x 0x%x] \n", *(buf), *(buf+nr_write-1));
+
     if (p_info->e_index == p_info->s_index)
     {
         p_info->is_full = true;
@@ -482,6 +507,10 @@ int cShmRead (cShmDev_t* p_dev, unsigned char *buf, int len)
     {
         nr_read = rv_len;
     }
+    printf ("read-1: [name:%s ][%d-%d] [0x%x] \n", p_dev->name,\
+            p_info->s_index, p_info->e_index, \
+            *(p_info->buf_addr + p_info->s_index));
+
     if (p_info->s_index >= p_info->e_index)
     {
         /*        e     s
@@ -513,6 +542,10 @@ int cShmRead (cShmDev_t* p_dev, unsigned char *buf, int len)
         memcpy (buf, p_info->buf_addr + p_info->s_index, nr_read);
         p_info->s_index += nr_read;
     }
+    printf ("read-2: [%d-%d] [0x%x] \n", p_info->s_index, p_info->e_index, \
+            *(p_info->buf_addr + p_info->s_index));
+    printf ("read-3: [0x%x 0x%x] \n", *(buf), *(buf+nr_read-1));
+
     p_info->is_full = false;
 
     p_dev->state = CSHM_IDEL;
