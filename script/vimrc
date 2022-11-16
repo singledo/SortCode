@@ -26,10 +26,12 @@ set autoread
 set directory=~/vimswap
 set tags=tags
 
+"
+
 let g:solarized_termcolors=256  "solarized主题设置在终端下的设置"
 let g:molokai_original = 1
 let g:rehash256 = 1
-let g:UltiSnipsUsePythonVersion = 3
+" let g:UltiSnipsUsePythonVersion = 3
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -43,7 +45,7 @@ syntax on
 set hlsearch
 
 if has("cscope")
-	set csprg=/usr/bin/cscope
+	set csprg=/opt/jzhang91/bin/bin/cscope
 	set csto=0
 	"find cscope db prior
 	set cst
@@ -57,6 +59,7 @@ if has("cscope")
 		cs add $CSCOPE_DB
 	endif
 	set csverb
+	set cscopetag
 endif
 
 
@@ -66,7 +69,8 @@ map <c-k> <c-w>k
 map <c-j> <c-w>j
 map <c-h> <c-w>h
 " heighlight
-colorscheme 1989
+colorscheme  gruvbox
+
 
 
 "for nerdtree
@@ -79,11 +83,11 @@ map <C-n> :NERDTreeToggle<CR>
 nmap <C-f> :TagbarToggle<CR>
 map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 " snip config
-let g:UltiSnipsSnippetDirectories=["./Snippets/C.snippets"]
+" let g:UltiSnipsSnippetDirectories=["./Snippets/C.snippets"]
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<c-e>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 set foldmethod=indent
 set foldlevel=99
 let g:ctrlp_max_height = 15
@@ -97,7 +101,9 @@ if exists('&signcolumn')  " Vim 7.4.2201
 else
     let g:gitgutter_sign_column_always = 1
 endif
+let g:gitgutter_set_sign_backgrounds = 1
 
+let g:gitgutter_sign_column_always = 1
 let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = 'xx'
 let g:gitgutter_sign_removed = '--'
@@ -160,9 +166,9 @@ let g:mdip_imgdir = '.'
 let g:mdip_imgname = 'Image'
 
 " Ack setting 
-nmap <leader>r : execute "Ack " .expand('<cword>') ." -i " ."./ --cc --cpp --asm --lua" <CR><CR>
-nmap <leader>o :copen <CR>
-nmap <leader>c :cclose <CR>
+nmap <leader>r : execute "CtrlSF " .expand('<cword>') ." " <CR><CR>
+nmap <leader>o :CtrlSFOpen <CR>
+nmap <leader>c :CtrlSFClose <CR>
 nnoremap <leader>n : cnext <CR>
 nnoremap <leader>l : cprev <CR>
 
@@ -191,11 +197,11 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tomasr/molokai'
-Plugin 'tpope/vim-surround'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'kien/ctrlp.vim'
+" Plugin 'tomasr/molokai'
+" Plugin 'tpope/vim-surround'
+" Plugin 'pangloss/vim-javascript'
 " add to .vimrc
 Plugin 'flazz/vim-colorschemes'
 
@@ -216,8 +222,9 @@ Plugin 'BurntSushi/ripgrep.git'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 Bundle 'ervandew/supertab' 
+Plugin 'airblade/vim-gitgutter'
 
 " for markdown
 
@@ -235,7 +242,8 @@ Plugin 'git@github.com:iamcco/markdown-preview.vim.git'
 
 " install image in vim
 Plugin 'ferrine/md-img-paste.vim'
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
+Bundle 'dyng/ctrlsf.vim'
 
 Plugin 'nathanaelkane/vim-indent-guides'
 
