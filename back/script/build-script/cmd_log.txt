@@ -1,0 +1,1119 @@
+Building kernel
++ cd /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4
+++ nproc
++ /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/build-tools/linux-x86/bin/make ARCH=arm64 CROSS_COMPILE=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android- 'HOSTCFLAGS=-I/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/msm-5.4/include/uapi -I/usr/include -I/usr/include/x86_64-linux-gnu -I/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/msm-5.4/include -L/usr/lib -L/usr/lib/x86_64-linux-gnu -fuse-ld=lld' 'HOSTLDFLAGS=-L/usr/lib -L/usr/lib/x86_64-linux-gnu -fuse-ld=lld' O=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4 REAL_CC=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- AR=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-ar LLVM_NM=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-nm LD=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/ld.lld NM=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-nm DTC_EXT=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/host/linux-x86/bin/dtc DTC_OVERLAY_TEST_EXT=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/host/linux-x86/bin/ufdt_apply_overlay CONFIG_BUILD_ARM64_DT_OVERLAY=y HOSTCC=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902b1/bin/clang HOSTAR=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ar HOSTLD=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ld -j72
+  GEN     Makefile
+  YACC    scripts/genksyms/parse.tab.[ch]
+  LEX     scripts/genksyms/lex.lex.c
+  HOSTCC  scripts/genksyms/parse.tab.o
+  HOSTCC  scripts/genksyms/lex.lex.o
+clang-11: warning: argument unused during compilation: '-L/usr/lib' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib/x86_64-linux-gnu' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-fuse-ld=lld' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib/x86_64-linux-gnu' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-fuse-ld=lld' [-Wunused-command-line-argument]
+  HOSTLD  scripts/genksyms/genksyms
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/modpost.o
+  HOSTCC  scripts/mod/sumversion.o
+clang-11: warning: argument unused during compilation: '-L/usr/lib' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib/x86_64-linux-gnu' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-fuse-ld=lld' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib/x86_64-linux-gnu' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-fuse-ld=lld' [-Wunused-command-line-argument]
+  HOSTCC  scripts/mod/file2alias.o
+clang-11: warning: argument unused during compilation: '-L/usr/lib' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-L/usr/lib/x86_64-linux-gnu' [-Wunused-command-line-argument]
+clang-11: warning: argument unused during compilation: '-fuse-ld=lld' [-Wunused-command-line-argument]
+  HOSTLD  scripts/mod/modpost
+  CALL    /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/msm-5.4/scripts/atomic/check-atomics.sh
+  CALL    /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/msm-5.4/scripts/checksyscalls.sh
+  LD      arch/arm64/kernel/vdso/vdso.so.dbg
+  VDSOSYM include/generated/vdso-offsets.h
+  AR      arch/arm64/net/built-in.a
+  GEN     usr/initramfs_data.cpio
+  EXTRACT_CERTS   
+  AR      ipc/built-in.a
+  AS      certs/system_certificates.o
+  AS      usr/initramfs_data.o
+  AR      drivers/auxdisplay/built-in.a
+  AR      drivers/cdrom/built-in.a
+  AR      drivers/char/ipmi/built-in.a
+  AR      drivers/crypto/hisilicon/built-in.a
+  AR      drivers/firewire/built-in.a
+  AR      drivers/hwtracing/intel_th/built-in.a
+  AR      drivers/idle/built-in.a
+  AR      drivers/gpu/vga/built-in.a
+  AR      drivers/i3c/built-in.a
+  CHK     include/generated/compile.h
+  AR      drivers/bus/mhi/controllers/built-in.a
+  AR      drivers/macintosh/built-in.a
+  AR      techpack/video/msm/built-in.a
+  AR      drivers/gnss/built-in.a
+  AR      drivers/hwspinlock/built-in.a
+  AR      techpack/stub/built-in.a
+  AR      arch/arm64/crypto/built-in.a
+  AR      usr/built-in.a
+  AR      drivers/dax/pmem/built-in.a
+  AR      drivers/gpu/trace/built-in.a
+  AR      techpack/dataipa/drivers/platform/msm/gsi/built-in.a
+  AR      certs/built-in.a
+  AR      drivers/hwtracing/stm/built-in.a
+  AR      drivers/extcon/built-in.a
+  AR      drivers/dma/mediatek/built-in.a
+  AR      drivers/bus/mhi/devices/built-in.a
+  AR      init/built-in.a
+  AR      techpack/display/msm-hyp/built-in.a
+  AR      drivers/amba/built-in.a
+  AR      techpack/ais/drivers/v4l2loopback-master_v2/built-in.a
+  AR      drivers/input/serio/built-in.a
+  AR      drivers/devfreq/event/built-in.a
+  AR      drivers/android/built-in.a
+  AR      drivers/iio/accel/built-in.a
+  AR      drivers/bus/mhi/core/built-in.a
+  AR      drivers/hwtracing/coresight/built-in.a
+  AR      drivers/i2c/algos/built-in.a
+  AR      arch/arm64/mm/built-in.a
+  AR      drivers/edac/built-in.a
+  AR      techpack/ais/drivers/cam_utils/built-in.a
+  AR      drivers/cpuidle/governors/built-in.a
+  AR      drivers/gpio/built-in.a
+  AR      net/802/built-in.a
+  AR      security/integrity/built-in.a
+  AR      drivers/clocksource/built-in.a
+  AR      techpack/audio/soc/built-in.a
+  AR      techpack/audio/ipc/built-in.a
+  AR      drivers/char/agp/built-in.a
+  AR      drivers/input/joystick/built-in.a
+  AR      sound/arm/built-in.a
+  AR      drivers/bluetooth/built-in.a
+  AR      drivers/leds/trigger/built-in.a
+  AR      drivers/dma-buf/built-in.a
+  AR      drivers/crypto/built-in.a
+  AR      sound/atmel/built-in.a
+  AR      drivers/firmware/broadcom/built-in.a
+  AR      techpack/video/built-in.a
+  AR      drivers/dax/built-in.a
+  AR      drivers/devfreq/built-in.a
+  AR      sound/drivers/mpu401/built-in.a
+  AR      drivers/dma/qcom/built-in.a
+  AR      drivers/iio/adc/built-in.a
+  AR      sound/firewire/built-in.a
+  CC [M]  techpack/audio/ipc/apr_vm.o
+  AR      drivers/iio/afe/built-in.a
+  AR      drivers/block/zram/built-in.a
+  AR      drivers/iio/amplifiers/built-in.a
+  AR      sound/hda/built-in.a
+  AR      drivers/iio/buffer/built-in.a
+  AR      drivers/firmware/arm_scmi/built-in.a
+  AR      sound/drivers/opl3/built-in.a
+  AR      drivers/media/firewire/built-in.a
+  AR      drivers/media/common/b2c2/built-in.a
+  AR      drivers/leds/built-in.a
+  AR      drivers/dma/xilinx/built-in.a
+  AR      drivers/dma/ti/built-in.a
+  AR      techpack/ais/drivers/built-in.a
+  AR      drivers/block/built-in.a
+  AR      drivers/cpuidle/built-in.a
+  AR      drivers/media/i2c/built-in.a
+  AR      techpack/ais/built-in.a
+  AR      sound/drivers/opl4/built-in.a
+  AR      techpack/display/built-in.a
+  AR      sound/drivers/pcsp/built-in.a
+  AR      sound/i2c/other/built-in.a
+  AR      sound/drivers/vx/built-in.a
+  AR      drivers/iio/chemical/built-in.a
+  AR      drivers/media/common/saa7146/built-in.a
+  AR      drivers/irqchip/built-in.a
+  AR      drivers/firmware/imx/built-in.a
+  AR      drivers/media/common/siano/built-in.a
+  AR      drivers/media/common/v4l2-tpg/built-in.a
+  AR      drivers/mailbox/built-in.a
+  AR      drivers/clk/actions/built-in.a
+  AR      drivers/clk/analogbits/built-in.a
+  AR      drivers/clk/bcm/built-in.a
+  CC [M]  techpack/audio/ipc/apr_v2.o
+  AR      sound/isa/ad1816a/built-in.a
+  AR      sound/isa/ad1848/built-in.a
+  AR      sound/isa/cs423x/built-in.a
+  AR      sound/isa/galaxy/built-in.a
+  AR      sound/i2c/built-in.a
+  AR      sound/isa/es1688/built-in.a
+  AR      drivers/dma/built-in.a
+  AR      drivers/input/misc/built-in.a
+  AR      drivers/iio/dac/built-in.a
+  AR      drivers/input/keyboard/built-in.a
+  AR      drivers/iio/common/cros_ec_sensors/built-in.a
+  AR      drivers/iio/dummy/built-in.a
+  AR      drivers/iio/frequency/built-in.a
+  AR      sound/drivers/built-in.a
+  AR      drivers/iio/gyro/built-in.a
+  AR      drivers/media/cec/built-in.a
+  AR      sound/isa/gus/built-in.a
+  AR      sound/isa/msnd/built-in.a
+  AR      drivers/iio/common/hid-sensors/built-in.a
+  AR      drivers/clk/imgtec/built-in.a
+  AR      sound/parisc/built-in.a
+  AR      sound/mips/built-in.a
+  AR      drivers/clk/imx/built-in.a
+  AR      drivers/iio/common/ms_sensors/built-in.a
+  AR      drivers/clk/ingenic/built-in.a
+  AR      drivers/char/hw_random/built-in.a
+  AR      drivers/iommu/built-in.a
+  AR      drivers/iio/common/ssp_sensors/built-in.a
+  AR      drivers/iio/common/st_sensors/built-in.a
+  AR      drivers/iio/health/built-in.a
+  AR      sound/pci/ac97/built-in.a
+  AR      sound/pcmcia/pdaudiocf/built-in.a
+  AR      drivers/clk/mvebu/built-in.a
+  AR      drivers/iio/humidity/built-in.a
+  AR      drivers/firmware/meson/built-in.a
+  AR      sound/pcmcia/vx/built-in.a
+  AR      drivers/bus/mhi/built-in.a
+  AR      drivers/clk/mediatek/built-in.a
+  AR      drivers/i2c/muxes/built-in.a
+  AR      drivers/media/mmc/siano/built-in.a
+  AR      sound/isa/sb/built-in.a
+  AR      sound/isa/opti9xx/built-in.a
+  AR      drivers/firmware/tegra/built-in.a
+  AR      drivers/iio/imu/bmi160/built-in.a
+  AR      drivers/nfc/qti/built-in.a
+  AR      drivers/firmware/xilinx/built-in.a
+  AR      drivers/char/built-in.a
+  AR      drivers/nvme/host/built-in.a
+  AR      sound/pci/ali5451/built-in.a
+  AR      drivers/nvme/target/built-in.a
+  AR      drivers/clk/renesas/built-in.a
+  AR      drivers/nfc/built-in.a
+  AR      drivers/clk/ti/built-in.a
+  AR      drivers/clk/sunxi/built-in.a
+  AR      drivers/iio/imu/inv_mpu6050/built-in.a
+  AR      drivers/media/pci/b2c2/built-in.a
+  AR      virt/lib/built-in.a
+  AR      sound/pci/asihpi/built-in.a
+  AR      drivers/iio/magnetometer/built-in.a
+  AR      drivers/iio/light/built-in.a
+  AR      drivers/bus/built-in.a
+  AR      drivers/iio/imu/st_asm330lhh/built-in.a
+  AR      drivers/iio/imu/st_lsm6dsx/built-in.a
+  AR      sound/pci/au88x0/built-in.a
+  AR      virt/built-in.a
+  AR      sound/isa/wavefront/built-in.a
+  AR      drivers/iio/multiplexer/built-in.a
+  AR      drivers/iio/orientation/built-in.a
+  AR      drivers/iio/potentiometer/built-in.a
+  AR      sound/pcmcia/built-in.a
+  AR      drivers/media/radio/built-in.a
+  AR      drivers/iio/potentiostat/built-in.a
+  AR      drivers/media/platform/cros-ec-cec/built-in.a
+  AR      drivers/media/platform/davinci/built-in.a
+  AR      sound/isa/wss/built-in.a
+  AR      drivers/media/spi/built-in.a
+  AR      drivers/media/tuners/built-in.a
+  AR      drivers/media/rc/keymaps/built-in.a
+  AR      drivers/mfd/built-in.a
+  AR      drivers/iio/pressure/built-in.a
+  AR      drivers/iio/imu/built-in.a
+  AR      drivers/media/pci/ddbridge/built-in.a
+  AR      drivers/media/pci/dm1105/built-in.a
+  AR      drivers/nvme/built-in.a
+  AR      drivers/cpufreq/built-in.a
+  AR      drivers/media/pci/mantis/built-in.a
+  AR      drivers/media/rc/built-in.a
+  AR      drivers/media/pci/intel/ipu3/built-in.a
+  AR      drivers/media/pci/netup_unidvb/built-in.a
+  AR      drivers/media/pci/ngene/built-in.a
+  AR      drivers/media/pci/pluto2/built-in.a
+  AR      drivers/media/pci/pt1/built-in.a
+  AR      drivers/media/pci/intel/built-in.a
+  AR      drivers/media/mmc/built-in.a
+  AR      drivers/firmware/psci/built-in.a
+  AR      drivers/media/pci/pt3/built-in.a
+  AR      net/bpf/built-in.a
+  AR      drivers/phy/allwinner/built-in.a
+  AR      drivers/iio/proximity/built-in.a
+  AR      drivers/phy/cadence/built-in.a
+  AR      drivers/iio/resolver/built-in.a
+  AR      drivers/phy/broadcom/built-in.a
+  AR      drivers/power/avs/built-in.a
+  AR      drivers/media/pci/saa7146/built-in.a
+  AR      drivers/misc/cardreader/built-in.a
+  AR      drivers/media/pci/smipcie/built-in.a
+  AR      drivers/input/touchscreen/synaptics_dsx/built-in.a
+  AR      drivers/iio/temperature/built-in.a
+  AR      drivers/iio/trigger/built-in.a
+  AR      drivers/phy/freescale/built-in.a
+  AR      drivers/misc/cb710/built-in.a
+  AR      drivers/misc/eeprom/built-in.a
+  AR      sound/isa/built-in.a
+  AR      drivers/misc/lis3lv02d/built-in.a
+  AR      drivers/phy/hisilicon/built-in.a
+  AR      drivers/i2c/busses/built-in.a
+  AR      sound/ppc/built-in.a
+  AR      drivers/media/platform/meson/built-in.a
+  AR      drivers/media/platform/omap/built-in.a
+  AR      drivers/nvmem/built-in.a
+  AR      drivers/media/platform/stm32/built-in.a
+  AR      drivers/media/platform/sunxi/sun4i-csi/built-in.a
+  AR      drivers/media/platform/sunxi/sun6i-csi/built-in.a
+  AR      drivers/phy/lantiq/built-in.a
+  AR      drivers/perf/built-in.a
+  AR      drivers/media/usb/b2c2/built-in.a
+  AR      drivers/media/usb/dvb-usb/built-in.a
+  AR      drivers/media/usb/dvb-usb-v2/built-in.a
+  AR      drivers/iio/common/built-in.a
+  AR      drivers/media/platform/sunxi/built-in.a
+  AR      drivers/media/platform/msm/npu/built-in.a
+  AR      drivers/ptp/built-in.a
+  AR      drivers/phy/marvell/built-in.a
+  AR      net/key/built-in.a
+  AR      drivers/media/platform/msm/built-in.a
+  AR      drivers/input/mouse/built-in.a
+  AR      drivers/power/reset/built-in.a
+  AR      drivers/media/pci/ttpci/built-in.a
+  AR      drivers/phy/motorola/built-in.a
+  AR      drivers/i2c/built-in.a
+  AR      drivers/iio/built-in.a
+  AR      net/ethernet/built-in.a
+  AR      drivers/input/touchscreen/built-in.a
+  AR      drivers/media/usb/s2255/built-in.a
+  AR      drivers/media/usb/siano/built-in.a
+  AR      sound/sh/built-in.a
+  AR      drivers/pwm/built-in.a
+  AR      drivers/media/usb/ttusb-budget/built-in.a
+  AR      drivers/media/usb/stkwebcam/built-in.a
+  AR      drivers/mmc/host/built-in.a
+  AR      drivers/media/usb/ttusb-dec/built-in.a
+  AR      sound/sparc/built-in.a
+  AR      drivers/power/supply/built-in.a
+  AR      sound/synth/built-in.a
+  AR      drivers/phy/mscc/built-in.a
+  AR      sound/spi/built-in.a
+  AR      net/rfkill/built-in.a
+  AR      net/packet/built-in.a
+  AR      drivers/input/built-in.a
+  AR      net/8021q/built-in.a
+  AR      drivers/misc/ti-st/built-in.a
+  AR      drivers/misc/mic/bus/built-in.a
+  AR      drivers/platform/msm/veth_ipa/built-in.a
+  AR      drivers/power/built-in.a
+  AR      sound/x86/built-in.a
+  AR      sound/xen/built-in.a
+  AR      net/llc/built-in.a
+  AR      drivers/pinctrl/actions/built-in.a
+  AR      drivers/media/platform/built-in.a
+  AR      sound/pci/aw2/built-in.a
+  AR      drivers/pinctrl/bcm/built-in.a
+  AR      sound/pci/ca0106/built-in.a
+  AR      sound/pci/cs46xx/built-in.a
+  AR      drivers/pinctrl/cirrus/built-in.a
+  AR      sound/pci/cs5535audio/built-in.a
+  AR      drivers/phy/ralink/built-in.a
+  AR      drivers/phy/samsung/built-in.a
+  AR      drivers/pinctrl/freescale/built-in.a
+  AR      drivers/pinctrl/mediatek/built-in.a
+  AR      net/netlink/built-in.a
+  AR      drivers/opp/built-in.a
+  AR      drivers/pinctrl/mvebu/built-in.a
+  AR      drivers/pinctrl/nomadik/built-in.a
+  AR      drivers/pinctrl/sprd/built-in.a
+  AR      drivers/media/pci/built-in.a
+  AR      drivers/pinctrl/ti/built-in.a
+  AR      drivers/phy/socionext/built-in.a
+  AR      drivers/media/usb/gspca/built-in.a
+  AR      drivers/net/dsa/b53/built-in.a
+  AR      sound/pci/ctxfi/built-in.a
+  AR      drivers/media/mc/built-in.a
+  AR      sound/pci/echoaudio/built-in.a
+  AR      drivers/platform/msm/ipa_fmwk/built-in.a
+  AR      drivers/media/common/videobuf2/built-in.a
+  AR      drivers/media/usb/zr364xx/built-in.a
+  OBJCOPY drivers/misc/lkdtm/rodata_objcopy.o
+  AR      drivers/misc/mic/built-in.a
+  AR      drivers/ras/built-in.a
+  AR      sound/pci/emu10k1/built-in.a
+  AR      drivers/misc/tusb4020/built-in.a
+  AR      sound/pci/hda/built-in.a
+  AR      drivers/media/common/built-in.a
+  AR [M]  drivers/misc/lkdtm/lkdtm.o
+  AR      drivers/net/dsa/microchip/built-in.a
+  AR      drivers/net/dsa/mv88e6xxx/built-in.a
+  AR      net/xdp/built-in.a
+  AR      drivers/phy/st/built-in.a
+  AR      drivers/phy/ti/built-in.a
+  AR      sound/pci/ice1712/built-in.a
+  AR      sound/pci/korg1212/built-in.a
+  AR      sound/pci/lola/built-in.a
+  AR      net/qrtr/built-in.a
+printf '%s\n' 'cmd_drivers/misc/lkdtm/lkdtm.o := rm -f drivers/misc/lkdtm/lkdtm.o.symversions; for i in                  ; do cat $$i.symversions >> drivers/misc/lkdtm/lkdtm.o.symversions; done; rm -f drivers/misc/lkdtm/lkdtm.o; /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-ar rcsTP drivers/misc/lkdtm/lkdtm.o drivers/misc/lkdtm/core.o drivers/misc/lkdtm/bugs.o drivers/misc/lkdtm/heap.o drivers/misc/lkdtm/perms.o drivers/misc/lkdtm/refcount.o drivers/misc/lkdtm/rodata_objcopy.o drivers/misc/lkdtm/usercopy.o drivers/misc/lkdtm/stackleak.o drivers/misc/lkdtm/cfi.o' > drivers/misc/lkdtm/.lkdtm.o.cmd
+  AR      drivers/net/slip/built-in.a
+  AR      drivers/soc/amlogic/built-in.a
+  AR      drivers/platform/msm/built-in.a
+  AR      drivers/misc/built-in.a
+  AR      drivers/soc/bcm/built-in.a
+  AR      drivers/soc/fsl/built-in.a
+  AR      drivers/net/dsa/sja1105/built-in.a
+  AR      drivers/rpmsg/built-in.a
+  AR      drivers/soc/mediatek/built-in.a
+  AR      net/unix/built-in.a
+  AR      drivers/clk/hisilicon/built-in.a
+  AR      drivers/soc/renesas/built-in.a
+  AR      drivers/of/built-in.a
+  AR      drivers/md/built-in.a
+  AR      drivers/soc/ti/built-in.a
+  GEN     security/selinux/flask.h security/selinux/av_permissions.h
+  AR      drivers/soc/xilinx/built-in.a
+  AR      drivers/spi/built-in.a
+  AR      drivers/staging/media/built-in.a
+  CC      security/selinux/avc.o
+  AR      drivers/staging/iio/accel/built-in.a
+  AR      drivers/platform/built-in.a
+  AR      drivers/soc/sunxi/built-in.a
+  AR      drivers/staging/iio/adc/built-in.a
+  AR      drivers/spmi/built-in.a
+  AR      drivers/staging/iio/addac/built-in.a
+  AR      security/keys/built-in.a
+  CC      security/selinux/hooks.o
+  AR      drivers/staging/iio/cdc/built-in.a
+  CC      security/selinux/selinuxfs.o
+  AR      drivers/staging/iio/frequency/built-in.a
+  CC      security/selinux/netlink.o
+  CC      security/selinux/nlmsgtab.o
+  AR      net/l2tp/built-in.a
+  AR      drivers/staging/iio/impedance-analyzer/built-in.a
+  AR      drivers/staging/iio/meter/built-in.a
+  AR      drivers/uio/built-in.a
+  AR      net/bluetooth/hidp/built-in.a
+  AR      drivers/usb/common/built-in.a
+  AR      sound/soc/adi/built-in.a
+  AR      sound/soc/amd/built-in.a
+  AR      drivers/remoteproc/built-in.a
+  CC      security/selinux/netif.o
+  AR      drivers/nvdimm/built-in.a
+  AR      arch/arm64/lib/lib.a
+  AR      sound/pci/lx6464es/built-in.a
+  AR      sound/pci/mixart/built-in.a
+  AR      drivers/staging/iio/resolver/built-in.a
+  AR      sound/soc/atmel/built-in.a
+  AR      sound/soc/au1x/built-in.a
+  AR      sound/pci/nm256/built-in.a
+  AR      drivers/staging/iio/built-in.a
+  AR      drivers/hid/usbhid/built-in.a
+  AR      sound/pci/oxygen/built-in.a
+  AR      sound/soc/bcm/built-in.a
+  AR      drivers/net/usb/built-in.a
+  AR      drivers/watchdog/built-in.a
+  AR      drivers/net/ppp/built-in.a
+  AR      sound/pci/pcxhr/built-in.a
+  AR      sound/soc/cirrus/built-in.a
+  AR      sound/soc/dwc/built-in.a
+  AR      sound/soc/codecs/built-in.a
+  AR      drivers/usb/class/built-in.a
+  AR      drivers/regulator/built-in.a
+  AR      sound/soc/fsl/built-in.a
+  AR      net/bluetooth/rfcomm/built-in.a
+  AR      sound/soc/hisilicon/built-in.a
+  AR      sound/soc/generic/built-in.a
+  AR      sound/soc/img/built-in.a
+  AR      drivers/pinctrl/qcom/built-in.a
+  AR      drivers/net/phy/built-in.a
+  EXPORTS arch/arm64/lib/lib-ksyms.o
+  AR      sound/soc/jz4740/built-in.a
+  AR      drivers/virtio/built-in.a
+  AR      sound/soc/intel/boards/built-in.a
+  AR      sound/pci/riptide/built-in.a
+  AR      sound/soc/intel/common/built-in.a
+  AR      drivers/hid/built-in.a
+  AR      sound/pci/rme9652/built-in.a
+  AR      sound/soc/intel/built-in.a
+  AR      sound/soc/kirkwood/built-in.a
+  AR      sound/pci/trident/built-in.a
+  AR      drivers/mmc/core/built-in.a
+  AR      net/bluetooth/built-in.a
+  CC      security/selinux/netnode.o
+  AR      drivers/video/fbdev/omap2/omapfb/displays/built-in.a
+  AR      sound/core/built-in.a
+  AR      drivers/video/fbdev/omap2/omapfb/dss/built-in.a
+  AR      drivers/video/backlight/built-in.a
+  AR      drivers/rtc/built-in.a
+  AR      drivers/pinctrl/built-in.a
+  AR      sound/soc/mediatek/built-in.a
+  AR      drivers/mmc/built-in.a
+  AR      drivers/video/fbdev/core/built-in.a
+  AR      sound/soc/meson/built-in.a
+  AR      sound/soc/mxs/built-in.a
+  AR      sound/soc/pxa/built-in.a
+  AR      sound/soc/qcom/built-in.a
+  AR      drivers/net/dsa/built-in.a
+  AR      sound/pci/vx222/built-in.a
+  AR      net/sched/built-in.a
+  AR      sound/soc/rockchip/built-in.a
+  AR      sound/soc/samsung/built-in.a
+  AR      sound/pci/ymfpci/built-in.a
+  CC      security/selinux/netport.o
+  CC      security/selinux/ss/ebitmap.o
+  AR      sound/soc/sh/built-in.a
+  AR      sound/soc/sirf/built-in.a
+  CC      security/selinux/ss/hashtab.o
+  AR      sound/pci/built-in.a
+  AR      sound/soc/sof/built-in.a
+  AR      drivers/phy/qualcomm/built-in.a
+  CC      security/selinux/ss/symtab.o
+  CC      security/selinux/ss/sidtab.o
+  AR      drivers/net/wireless/cnss_genl/built-in.a
+  AR      drivers/phy/built-in.a
+  AR      drivers/reset/hisilicon/built-in.a
+  AR      drivers/usb/misc/built-in.a
+  AR      drivers/video/fbdev/omap2/omapfb/built-in.a
+  AR      drivers/usb/roles/built-in.a
+  AR      drivers/usb/gadget/legacy/built-in.a
+  AR      drivers/usb/mon/built-in.a
+  AR      drivers/video/fbdev/omap2/built-in.a
+  AR      net/bridge/netfilter/built-in.a
+  AR      drivers/video/fbdev/built-in.a
+  AR      sound/soc/spear/built-in.a
+  AR      net/bridge/built-in.a
+  AR      sound/soc/sprd/built-in.a
+  AR      drivers/video/built-in.a
+  AR      drivers/net/wireless/cnss_prealloc/built-in.a
+  AR      drivers/usb/typec/altmodes/built-in.a
+  AR      drivers/net/wireless/cnss_utils/built-in.a
+  AR      drivers/usb/typec/mux/built-in.a
+  AR      drivers/media/usb/uvc/built-in.a
+  CC      security/selinux/ss/avtab.o
+  AR      net/xfrm/built-in.a
+  AR      drivers/base/test/built-in.a
+  AR      drivers/base/firmware_loader/builtin/built-in.a
+  AR      sound/soc/sti/built-in.a
+  AR      sound/soc/stm/built-in.a
+  AR      drivers/thermal/broadcom/built-in.a
+  AR      drivers/reset/built-in.a
+  AR      drivers/thermal/intel/built-in.a
+  AR      sound/soc/sunxi/built-in.a
+  AR      sound/soc/tegra/built-in.a
+  AR      drivers/thermal/qcom/built-in.a
+  AR      drivers/thermal/samsung/built-in.a
+  AR      drivers/base/firmware_loader/built-in.a
+  AR      drivers/thermal/st/built-in.a
+  AR      sound/soc/ti/built-in.a
+  AR      drivers/thermal/tegra/built-in.a
+  CC      security/selinux/ss/policydb.o
+  CC      security/selinux/ss/services.o
+  AR      drivers/thermal/built-in.a
+  CC      security/selinux/ss/conditional.o
+  AR      techpack/audio/asoc/codecs/bolero/built-in.a
+  AR      drivers/usb/typec/tcpm/built-in.a
+  AR      drivers/soc/qcom/hgsl/built-in.a
+  AR      drivers/media/usb/built-in.a
+  AR      sound/soc/txx9/built-in.a
+  AR      sound/soc/uniphier/built-in.a
+  AR      drivers/usb/gadget/udc/built-in.a
+  CC      arch/arm64/kernel/signal.o
+  AR      sound/soc/xilinx/built-in.a
+  AR      drivers/staging/android/ion/heaps/built-in.a
+  AR      sound/soc/xtensa/built-in.a
+  AR      sound/soc/ux500/built-in.a
+  AR      sound/soc/zte/built-in.a
+  AR      drivers/media/v4l2-core/built-in.a
+  AR      drivers/usb/phy/built-in.a
+  CC      security/selinux/ss/mls.o
+  AR      drivers/usb/dwc3/built-in.a
+  AR      sound/soc/built-in.a
+  CC      security/selinux/ss/status.o
+  AR      drivers/tty/ipwireless/built-in.a
+  AR      techpack/audio/asoc/codecs/rouleur/built-in.a
+  AR      techpack/audio/asoc/codecs/wsa883x/built-in.a
+  AR      drivers/tty/vt/built-in.a
+  CC      arch/arm64/kernel/vdso.o
+  AR      techpack/audio/asoc/codecs/wcd934x/built-in.a
+  AR      techpack/audio/asoc/codecs/wcd937x/built-in.a
+  AR      drivers/tty/hvc/built-in.a
+  AR      techpack/audio/asoc/codecs/wcd938x/built-in.a
+  AR      drivers/usb/typec/built-in.a
+  AR      drivers/usb/core/built-in.a
+  AR      drivers/usb/host/built-in.a
+  AR      techpack/audio/asoc/codecs/built-in.a
+  AR      drivers/tty/serdev/built-in.a
+  AR      techpack/audio/asoc/built-in.a
+  CC      arch/arm64/kernel/signal32.o
+  AR      kernel/livepatch/built-in.a
+  AR      drivers/usb/storage/built-in.a
+  AR      drivers/staging/android/ion/built-in.a
+  AR      drivers/soc/qcom/memshare/built-in.a
+  AR      net/tipc/built-in.a
+  AR      techpack/audio/dsp/codecs/built-in.a
+  AR      drivers/base/power/built-in.a
+  AR      drivers/base/regmap/built-in.a
+  AR      drivers/staging/android/built-in.a
+  GZIP    kernel/config_data.gz
+  CHK     kernel/kheaders_data.tar.xz
+  AR      sound/usb/6fire/built-in.a
+  AR      sound/usb/bcd2000/built-in.a
+  AR      sound/usb/caiaq/built-in.a
+  AR      sound/usb/hiface/built-in.a
+  AR      sound/usb/misc/built-in.a
+  AR      sound/usb/usx2y/built-in.a
+  AR      drivers/staging/built-in.a
+  OBJCOPY arch/arm64/kernel/efi-entry.stub.o
+  AR      sound/usb/built-in.a
+  AR      arch/arm64/lib/built-in.a
+  AR      net/core/built-in.a
+  AR      drivers/net/wireless/cnss2/built-in.a
+  AR      net/wireless/built-in.a
+  AR      block/partitions/built-in.a
+  AR      fs/exportfs/built-in.a
+  AR      drivers/base/built-in.a
+  AR      fs/debugfs/built-in.a
+  AR      techpack/audio/dsp/built-in.a
+  AR      kernel/printk/built-in.a
+  AR      fs/devpts/built-in.a
+  AR      drivers/media/built-in.a
+  AR      block/built-in.a
+  AR      fs/configfs/built-in.a
+  AR      drivers/scsi/ufs/built-in.a
+  AR      fs/kernfs/built-in.a
+  AR      drivers/clk/qcom/built-in.a
+  AR      fs/jbd2/built-in.a
+  AR      drivers/net/wireless/built-in.a
+  AR      kernel/power/built-in.a
+  AR      fs/fuse/built-in.a
+  AR      drivers/net/built-in.a
+  AR      kernel/events/built-in.a
+  AR      drivers/tty/serial/8250/built-in.a
+  AR      drivers/usb/gadget/function/built-in.a
+  AR      fs/iomap/built-in.a
+  AR      fs/erofs/built-in.a
+  AR      sound/built-in.a
+  AR      fs/exfat/built-in.a
+  STUBCPY drivers/firmware/efi/libstub/lib-fdt.stub.o
+  AR      kernel/cgroup/built-in.a
+  STUBCPY drivers/firmware/efi/libstub/lib-fdt_empty_tree.stub.o
+  STUBCPY drivers/firmware/efi/libstub/lib-fdt_ro.stub.o
+  AR      drivers/clk/built-in.a
+  AR      fs/fat/built-in.a
+  STUBCPY drivers/firmware/efi/libstub/lib-fdt_rw.stub.o
+  AR      fs/crypto/built-in.a
+  STUBCPY drivers/firmware/efi/libstub/lib-fdt_sw.stub.o
+  STUBCPY drivers/firmware/efi/libstub/lib-fdt_wip.stub.o
+  STUBCPY drivers/firmware/efi/libstub/lib-sort.stub.o
+  LD      arch/arm64/kernel/vdso/vdso.so.dbg
+  STUBCPY drivers/firmware/efi/libstub/arm-stub.stub.o
+  STUBCPY drivers/firmware/efi/libstub/arm64-stub.stub.o
+  STUBCPY drivers/firmware/efi/libstub/efi-stub-helper.stub.o
+  OBJCOPY arch/arm64/kernel/vdso/vdso.so
+  AR      drivers/tty/serial/built-in.a
+  AS      arch/arm64/kernel/vdso/vdso.o
+  STUBCPY drivers/firmware/efi/libstub/fdt.stub.o
+  STUBCPY drivers/firmware/efi/libstub/gop.stub.o
+  STUBCPY drivers/firmware/efi/libstub/random.stub.o
+  STUBCPY drivers/firmware/efi/libstub/secureboot.stub.o
+  AR      kernel/dma/built-in.a
+  AR      fs/notify/dnotify/built-in.a
+  AR      kernel/rcu/built-in.a
+  STUBCPY drivers/firmware/efi/libstub/string.stub.o
+  CC      kernel/configs.o
+  STUBCPY drivers/firmware/efi/libstub/tpm.stub.o
+  AR      fs/notify/fanotify/built-in.a
+  AR      kernel/locking/built-in.a
+  AR      fs/tracefs/built-in.a
+  AR      drivers/scsi/built-in.a
+  SHIPPED fs/unicode/utf8data.h
+  AR      fs/ramfs/built-in.a
+  AR      drivers/tty/built-in.a
+  AR      drivers/firmware/efi/libstub/lib.a
+  AR      fs/pstore/built-in.a
+  EXPORTS drivers/firmware/efi/libstub/lib-ksyms.o
+  AR      arch/arm64/kernel/probes/built-in.a
+  AR      drivers/usb/gadget/built-in.a
+  AR      fs/sysfs/built-in.a
+  AR      mm/built-in.a
+  GEN     kernel/kheaders_data.tar.xz
+  AR      arch/arm64/kernel/vdso/built-in.a
+  AR      fs/notify/inotify/built-in.a
+  AR      fs/overlayfs/built-in.a
+  AR      fs/quota/built-in.a
+  AR      drivers/soc/qcom/hab/built-in.a
+  AR      drivers/usb/built-in.a
+  AR      fs/notify/built-in.a
+  CC      fs/unicode/utf8-norm.o
+  AR      drivers/soc/qcom/built-in.a
+  AR      drivers/firmware/efi/libstub/built-in.a
+  AR      kernel/irq/built-in.a
+  AR      drivers/firmware/efi/built-in.a
+  AR      fs/f2fs/built-in.a
+  AR      drivers/firmware/built-in.a
+  AR      drivers/gpu/drm/arm/built-in.a
+  AR      drivers/gpu/drm/panel/built-in.a
+  AR      drivers/gpu/drm/hisilicon/built-in.a
+  AR      drivers/gpu/drm/i2c/built-in.a
+  AR      drivers/gpu/drm/rcar-du/built-in.a
+  AR      drivers/gpu/drm/tilcdc/built-in.a
+  AR      drivers/gpu/drm/bridge/synopsys/built-in.a
+  AR      drivers/gpu/drm/tiny/built-in.a
+  AR      drivers/gpu/drm/omapdrm/displays/built-in.a
+  AR      drivers/gpu/drm/omapdrm/dss/built-in.a
+  AR      drivers/gpu/drm/omapdrm/built-in.a
+  AR      drivers/gpu/drm/bridge/built-in.a
+  AR      techpack/dataipa/drivers/platform/msm/ipa/ipa_v3/built-in.a
+  AR      drivers/soc/built-in.a
+  AR      fs/verity/built-in.a
+  AR      crypto/asymmetric_keys/built-in.a
+  AR      crypto/built-in.a
+  AR      net/ipv6/netfilter/built-in.a
+  AR      kernel/time/built-in.a
+  AR      kernel/trace/built-in.a
+  AR      net/mac80211/built-in.a
+  AR      drivers/pci/switch/built-in.a
+  AR      techpack/dataipa/drivers/platform/msm/ipa/ipa_clients/built-in.a
+  AR      kernel/bpf/built-in.a
+  AR      fs/ext4/built-in.a
+  AR      drivers/gpu/drm/ttm/built-in.a
+  AR      net/ipv6/built-in.a
+  AR      kernel/sched/built-in.a
+  AR      drivers/pci/pcie/built-in.a
+  AR      drivers/gpu/drm/built-in.a
+  AR      drivers/pci/endpoint/functions/built-in.a
+  AR      fs/proc/built-in.a
+  AR      drivers/pci/endpoint/built-in.a
+  AR      techpack/dataipa/drivers/platform/msm/ipa/built-in.a
+  AR      net/ipv4/netfilter/built-in.a
+  AR      fs/nls/built-in.a
+  AR      drivers/pci/controller/dwc/built-in.a
+  AR      drivers/pci/controller/built-in.a
+  AR      drivers/pci/built-in.a
+  AR      drivers/gpu/built-in.a
+  AR      net/ipv4/built-in.a
+  AR      net/netfilter/built-in.a
+  AR      drivers/built-in.a
+  AR      fs/unicode/built-in.a
+  AR      fs/built-in.a
+  AR      techpack/dataipa/drivers/platform/msm/built-in.a
+  AR      lib/lzo/built-in.a
+  AR      lib/zlib_deflate/built-in.a
+  AR      lib/fonts/built-in.a
+  AR      lib/lz4/built-in.a
+  AR      lib/crypto/built-in.a
+  AR      lib/math/built-in.a
+  AR      lib/reed_solomon/built-in.a
+  AR      techpack/dataipa/built-in.a
+  AR      lib/xz/built-in.a
+  AR      lib/zlib_inflate/built-in.a
+  AR [M]  techpack/audio/ipc/apr_dlkm.o
+printf '%s\n' 'cmd_techpack/audio/ipc/apr_dlkm.o := rm -f techpack/audio/ipc/apr_dlkm.o.symversions; for i in  techpack/audio/ipc/apr_vm.o  techpack/audio/ipc/apr_v2.o; do cat $$i.symversions >> techpack/audio/ipc/apr_dlkm.o.symversions; done; rm -f techpack/audio/ipc/apr_dlkm.o; /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-ar rcsTP techpack/audio/ipc/apr_dlkm.o techpack/audio/ipc/apr_vm.o techpack/audio/ipc/apr_v2.o' > techpack/audio/ipc/.apr_dlkm.o.cmd
+  AR      techpack/audio/built-in.a
+  AR      lib/zstd/built-in.a
+  AR      lib/lib.a
+  AR      techpack/built-in.a
+  AR      arch/arm64/kernel/built-in.a
+  EXPORTS lib/lib-ksyms.o
+  AR      net/built-in.a
+  AR      lib/mpi/built-in.a
+  AR      arch/arm64/built-in.a
+  AR      lib/built-in.a
+  AR      security/selinux/built-in.a
+  AR      security/built-in.a
+  CC      kernel/kheaders.o
+  AR      kernel/built-in.a
+  GEN     .version
+  CHK     include/generated/compile.h
+  UPD     include/generated/compile.h
+  CC      init/version.o
+  AR      init/built-in.a
+  LTO     vmlinux.o
+  MODPOST vmlinux.o
+WARNING: "embms_tm_multicast_recv" [vmlinux] is a static EXPORT_SYMBOL
+  MODINFO modules.builtin.modinfo
+  LD      .tmp_vmlinux.kallsyms1
+  KSYM    .tmp_vmlinux.kallsyms1.o
+  LD      .tmp_vmlinux.kallsyms2
+  KSYM    .tmp_vmlinux.kallsyms2.o
+  LD      vmlinux
+  SORTEX  vmlinux
+  SYSMAP  System.map
+  LTO [M] drivers/misc/lkdtm/lkdtm.lto.o
+  LTO [M] lib/atomic64_test.lto.o
+  LTO [M] lib/test_user_copy.lto.o
+  LTO [M] techpack/audio/asoc/codecs/hdmi_dlkm.lto.o
+  LTO [M] techpack/audio/asoc/codecs/stub_dlkm.lto.o
+  LTO [M] techpack/audio/asoc/machine_dlkm.lto.o
+  OBJCOPY arch/arm64/boot/Image
+  LTO [M] techpack/audio/asoc/platform_dlkm.lto.o
+  LTO [M] techpack/audio/dsp/adsp_loader_dlkm.lto.o
+  LTO [M] techpack/audio/dsp/codecs/native_dlkm.lto.o
+  LTO [M] techpack/audio/dsp/q6_dlkm.lto.o
+  LTO [M] techpack/audio/dsp/q6_notifier_dlkm.lto.o
+  LTO [M] techpack/audio/ipc/apr_dlkm.lto.o
+  LTO [M] techpack/audio/soc/snd_event_dlkm.lto.o
+  Building modules, stage 2.
+  MODPOST 13 modules
+WARNING: "q6asm_memory_map_regions" [techpack/audio/dsp/q6_dlkm] is a static EXPORT_SYMBOL
+WARNING: "q6asm_memory_unmap_regions" [techpack/audio/dsp/q6_dlkm] is a static EXPORT_SYMBOL
+WARNING: "q6asm_enc_cfg_blk_pcm_v5" [techpack/audio/dsp/q6_dlkm] is a static EXPORT_SYMBOL
+  LD [M]  drivers/misc/lkdtm/lkdtm.ko
+  LD [M]  lib/atomic64_test.ko
+  LD [M]  lib/test_user_copy.ko
+  LD [M]  techpack/audio/asoc/codecs/hdmi_dlkm.ko
+  LD [M]  techpack/audio/asoc/codecs/stub_dlkm.ko
+  LD [M]  techpack/audio/asoc/machine_dlkm.ko
+  LD [M]  techpack/audio/asoc/platform_dlkm.ko
+  LD [M]  techpack/audio/dsp/adsp_loader_dlkm.ko
+  LD [M]  techpack/audio/dsp/codecs/native_dlkm.ko
+  LD [M]  techpack/audio/dsp/q6_dlkm.ko
+  LD [M]  techpack/audio/dsp/q6_notifier_dlkm.ko
+  LD [M]  techpack/audio/ipc/apr_dlkm.ko
+  LD [M]  techpack/audio/soc/snd_event_dlkm.ko
++ set +x
+======================
+Installing kernel modules
++ cd /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4
++ /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/build-tools/linux-x86/bin/make O=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4 INSTALL_MOD_STRIP=1 INSTALL_MOD_PATH=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging REAL_CC=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- AR=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-ar LLVM_NM=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-nm LD=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/ld.lld NM=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-nm DTC_EXT=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/host/linux-x86/bin/dtc DTC_OVERLAY_TEST_EXT=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/host/linux-x86/bin/ufdt_apply_overlay CONFIG_BUILD_ARM64_DT_OVERLAY=y HOSTCC=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902b1/bin/clang HOSTAR=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ar HOSTLD=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ld modules_install
+  INSTALL drivers/misc/lkdtm/lkdtm.ko
+  INSTALL lib/atomic64_test.ko
+  INSTALL lib/test_user_copy.ko
+  INSTALL techpack/audio/asoc/codecs/hdmi_dlkm.ko
+  INSTALL techpack/audio/asoc/codecs/stub_dlkm.ko
+  INSTALL techpack/audio/asoc/machine_dlkm.ko
+  INSTALL techpack/audio/asoc/platform_dlkm.ko
+  INSTALL techpack/audio/dsp/adsp_loader_dlkm.ko
+  INSTALL techpack/audio/dsp/codecs/native_dlkm.ko
+  INSTALL techpack/audio/dsp/q6_dlkm.ko
+  INSTALL techpack/audio/dsp/q6_notifier_dlkm.ko
+  INSTALL techpack/audio/ipc/apr_dlkm.ko
+  INSTALL techpack/audio/soc/snd_event_dlkm.ko
+  DEPMOD  5.4.61-qgki-debug+
++ set +x
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/ship_prebuilt/primary_kernel
+======================
+ Copying modules files
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/drivers/misc/lkdtm/lkdtm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/lib/atomic64_test.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/lib/test_user_copy.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/hdmi_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/stub_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/machine_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/platform_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/adsp_loader_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/codecs/native_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_notifier_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/ipc/apr_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4/staging/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/soc/snd_event_dlkm.ko
+Copying module signing certificate into prebuilt
++ BLOCKLIST_FILE=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/device/qcom/kernelscripts/modules_blocklist/modules.blocklist.msmnile
++ '[' -f /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/device/qcom/kernelscripts/modules_blocklist/modules.blocklist.msmnile ']'
++ set +x
+=============
+Copying files to prebuilt
+vmlinux /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/ship_prebuilt/primary_kernel
+vmlinux copied to /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/ship_prebuilt/primary_kernel
+System.map /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/ship_prebuilt/primary_kernel
+System.map copied to /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/ship_prebuilt/primary_kernel
+=============
+Copying kernel image to prebuilt
+=============
+Copying target dtb/dtbo files to prebuilt
+=============
+Copying arch-specific generated headers to prebuilt
+=============
+Copying kernel generated headers to prebuilt
+============
+Copying userspace headers to prebuilt
+============
+Copying kernel scripts to prebuilt
+======================
+~/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules ~/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf
+Archiving vendor ramdisk kernel modules: 
+
+Archiving vendor kernel modules: 
+adsp_loader_dlkm.ko apr_dlkm.ko atomic64_test.ko hdmi_dlkm.ko lkdtm.ko machine_dlkm.ko native_dlkm.ko platform_dlkm.ko q6_dlkm.ko q6_notifier_dlkm.ko snd_event_dlkm.ko stub_dlkm.ko test_user_copy.ko
++ BLOCKLIST_FILE=
++ '[' -f modules.blocklist ']'
++ zip -rq vendor_modules.zip adsp_loader_dlkm.ko apr_dlkm.ko atomic64_test.ko hdmi_dlkm.ko lkdtm.ko machine_dlkm.ko native_dlkm.ko platform_dlkm.ko q6_dlkm.ko q6_notifier_dlkm.ko snd_event_dlkm.ko stub_dlkm.ko test_user_copy.ko
++ set +x
+~/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf
+======================
+Creating a copy of unstripped modules
++ cd /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4
++ /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/build-tools/linux-x86/bin/make O=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4 INSTALL_MOD_PATH=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped REAL_CC=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- AR=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-ar LLVM_NM=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-nm LD=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/ld.lld NM=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902/bin/llvm-nm DTC_EXT=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/host/linux-x86/bin/dtc DTC_OVERLAY_TEST_EXT=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/host/linux-x86/bin/ufdt_apply_overlay CONFIG_BUILD_ARM64_DT_OVERLAY=y HOSTCC=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/clang/host/linux-x86/clang-r383902b1/bin/clang HOSTAR=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ar HOSTLD=/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ld modules_install
+  INSTALL drivers/misc/lkdtm/lkdtm.ko
+  INSTALL lib/atomic64_test.ko
+  INSTALL lib/test_user_copy.ko
+  INSTALL techpack/audio/asoc/codecs/hdmi_dlkm.ko
+  INSTALL techpack/audio/asoc/codecs/stub_dlkm.ko
+  INSTALL techpack/audio/asoc/machine_dlkm.ko
+  INSTALL techpack/audio/asoc/platform_dlkm.ko
+  INSTALL techpack/audio/dsp/adsp_loader_dlkm.ko
+  INSTALL techpack/audio/dsp/codecs/native_dlkm.ko
+  INSTALL techpack/audio/dsp/q6_dlkm.ko
+  INSTALL techpack/audio/dsp/q6_notifier_dlkm.ko
+  INSTALL techpack/audio/ipc/apr_dlkm.ko
+  INSTALL techpack/audio/soc/snd_event_dlkm.ko
+  DEPMOD  5.4.61-qgki-debug+
+++ find /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped -type f -name '*.ko'
++ MODULES='/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/drivers/misc/lkdtm/lkdtm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/lib/atomic64_test.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/lib/test_user_copy.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/hdmi_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/stub_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/machine_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/platform_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/adsp_loader_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/codecs/native_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_notifier_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/ipc/apr_dlkm.ko
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/soc/snd_event_dlkm.ko'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/drivers/misc/lkdtm/lkdtm.ko
++ MODULE_NAME=lkdtm.ko
+++ echo lkdtm.ko
++ CORRECTED_NAME=lkdtm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/drivers/misc/lkdtm/lkdtm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' lkdtm.ko '!=' lkdtm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/lib/atomic64_test.ko
++ MODULE_NAME=atomic64_test.ko
+++ echo atomic64_test.ko
++ CORRECTED_NAME=atomic64_test.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/lib/atomic64_test.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' atomic64_test.ko '!=' atomic64_test.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/lib/test_user_copy.ko
++ MODULE_NAME=test_user_copy.ko
+++ echo test_user_copy.ko
++ CORRECTED_NAME=test_user_copy.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/lib/test_user_copy.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' test_user_copy.ko '!=' test_user_copy.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/hdmi_dlkm.ko
++ MODULE_NAME=hdmi_dlkm.ko
+++ echo hdmi_dlkm.ko
++ CORRECTED_NAME=hdmi_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/hdmi_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' hdmi_dlkm.ko '!=' hdmi_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/stub_dlkm.ko
++ MODULE_NAME=stub_dlkm.ko
+++ echo stub_dlkm.ko
++ CORRECTED_NAME=stub_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/codecs/stub_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' stub_dlkm.ko '!=' stub_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/machine_dlkm.ko
++ MODULE_NAME=machine_dlkm.ko
+++ echo machine_dlkm.ko
++ CORRECTED_NAME=machine_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/machine_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' machine_dlkm.ko '!=' machine_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/platform_dlkm.ko
++ MODULE_NAME=platform_dlkm.ko
+++ echo platform_dlkm.ko
++ CORRECTED_NAME=platform_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/asoc/platform_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' platform_dlkm.ko '!=' platform_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/adsp_loader_dlkm.ko
++ MODULE_NAME=adsp_loader_dlkm.ko
+++ echo adsp_loader_dlkm.ko
++ CORRECTED_NAME=adsp_loader_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/adsp_loader_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' adsp_loader_dlkm.ko '!=' adsp_loader_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/codecs/native_dlkm.ko
++ MODULE_NAME=native_dlkm.ko
+++ echo native_dlkm.ko
++ CORRECTED_NAME=native_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/codecs/native_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' native_dlkm.ko '!=' native_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_dlkm.ko
++ MODULE_NAME=q6_dlkm.ko
+++ echo q6_dlkm.ko
++ CORRECTED_NAME=q6_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' q6_dlkm.ko '!=' q6_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_notifier_dlkm.ko
++ MODULE_NAME=q6_notifier_dlkm.ko
+++ echo q6_notifier_dlkm.ko
++ CORRECTED_NAME=q6_notifier_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/dsp/q6_notifier_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' q6_notifier_dlkm.ko '!=' q6_notifier_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/ipc/apr_dlkm.ko
++ MODULE_NAME=apr_dlkm.ko
+++ echo apr_dlkm.ko
++ CORRECTED_NAME=apr_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/ipc/apr_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' apr_dlkm.ko '!=' apr_dlkm.ko ']'
++ for MODULE in '${MODULES}'
+++ basename /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/soc/snd_event_dlkm.ko
++ MODULE_NAME=snd_event_dlkm.ko
+++ echo snd_event_dlkm.ko
++ CORRECTED_NAME=snd_event_dlkm.ko
++ cp -p /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib/modules/5.4.61-qgki-debug+/kernel/techpack/audio/soc/snd_event_dlkm.ko /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped
++ '[' snd_event_dlkm.ko '!=' snd_event_dlkm.ko ']'
++ rm -rf /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/dlkm/lib/modules/unstripped/lib
++ set +x
+[ 92% 1690/1821] build out/target/product/msmnile_gvmq/kernel
+[ 92% 1691/1821] build out/target/product/msmnile_gvmq/obj/KERNEL_OBJ/rtic_mp.dtb
+[ 92% 1692/1821] build out/target/product/msmnile_gvmq/dtb.img
+[ 92% 1693/1821] Target dtbo image: out/target/product/msmnile_gvmq/prebuilt_dtbo.img
+create image file: out/target/product/msmnile_gvmq/prebuilt_dtbo.img...
+Total 0 entries.
+[ 93% 1694/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/check_vintf_all_intermediates/kernel_configs.txt
+[ 93% 1695/1821] build out/target/product/msmnile_gvmq/dtbo.img
+[ 93% 1696/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/check_vintf_all_intermediates/check_vintf_compatible_log
+[ 93% 1697/1821] Target boot image from recovery: out/target/product/msmnile_gvmq/boot.img
+[ 93% 1698/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/adsp_loader_dlkm.ko
+[ 93% 1699/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/apr_dlkm.ko
+[ 93% 1700/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/adsp_loader_dlkm.ko
+[ 93% 1701/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/apr_dlkm.ko
+[ 93% 1702/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/q6_notifier_dlkm.ko
+[ 93% 1703/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/hdmi_dlkm.ko
+[ 93% 1704/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/stub_dlkm.ko
+[ 93% 1705/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/test_user_copy.ko
+[ 93% 1706/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/lkdtm.ko
+[ 93% 1707/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/q6_dlkm.ko
+[ 93% 1708/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/snd_event_dlkm.ko
+[ 93% 1709/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/atomic64_test.ko
+[ 93% 1710/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/machine_dlkm.ko
+[ 93% 1711/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/native_dlkm.ko
+[ 94% 1712/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/hdmi_dlkm.ko
+[ 94% 1713/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/platform_dlkm.ko
+[ 94% 1714/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/q6_notifier_dlkm.ko
+[ 94% 1715/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/snd_event_dlkm.ko
+[ 94% 1716/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/stub_dlkm.ko
+[ 94% 1717/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/test_user_copy.ko
+[ 94% 1718/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/atomic64_test.ko
+[ 94% 1719/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/lkdtm.ko
+[ 94% 1720/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/machine_dlkm.ko
+[ 94% 1721/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/q6_dlkm.ko
+[ 94% 1722/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/native_dlkm.ko
+[ 94% 1723/1821] Installed file list: out/target/product/msmnile_gvmq/installed-files-recovery.txt
+[ 94% 1724/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/platform_dlkm.ko
+[ 94% 1725/1821] build out/target/product/msmnile_gvmq/obj/vendor/qcom/opensource/wlan/qcacld-3.0/.qcn7605/buildko.timestamp
+make: Entering directory '/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4'
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/msm-5.4/../../vendor/qcom/opensource/wlan/qcacld-3.0/.qcn7605/Kbuild:46: "Overriding WLAN config with:  CONFIG_FEATURE_COEX=y CONFIG_QCACLD_FEATURE_BTC_CHAIN_MODE=y"
+../../vendor/qcom/opensource/wlan/qcacld-3.0/.qcn7605/Kbuild:46: "Overriding WLAN config with:  CONFIG_FEATURE_COEX=y CONFIG_QCACLD_FEATURE_BTC_CHAIN_MODE=y"
+  LTO [M] ../../vendor/qcom/opensource/wlan/qcacld-3.0/.qcn7605/wlan.lto.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  LD [M]  ../../vendor/qcom/opensource/wlan/qcacld-3.0/.qcn7605/wlan.ko
+make: Leaving directory '/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4'
+[ 94% 1726/1821] build out/target/product/msmnile_gvmq/obj/vendor/qcom/opensource/wlan/qcacld-3.0/.qcn7605/qca_cld3_qcn7605.ko
+[ 94% 1727/1821] target Prebuilt: qca_cld3_qcn7605.ko (out/target/product/msmnile_gvmq/obj/DLKM/qca_cld3_qcn7605.ko_intermediates/qca_cld3_qcn7605.ko)
+[ 94% 1728/1821] Install: out/target/product/msmnile_gvmq/dlkm/lib/modules/qca_cld3_qcn7605.ko
+[ 94% 1729/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/qca_cld3_qcn7605.ko
+[ 95% 1730/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/qca_cld3_qcn7605.ko
+[ 95% 1731/1821] build out/target/product/msmnile_gvmq/obj/vendor/qcom/opensource/wlan/qcacld-3.0/.qca6174/buildko.timestamp
+make: Entering directory '/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4'
+  LTO [M] ../../vendor/qcom/opensource/wlan/qcacld-3.0/.qca6174/wlan.lto.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  LD [M]  ../../vendor/qcom/opensource/wlan/qcacld-3.0/.qca6174/wlan.ko
+make: Leaving directory '/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4'
+[ 95% 1732/1821] build out/target/product/msmnile_gvmq/obj/vendor/qcom/opensource/wlan/qcacld-3.0/.qca6174/qca_cld3_qca6174.ko
+[ 95% 1733/1821] target Prebuilt: qca_cld3_qca6174.ko (out/target/product/msmnile_gvmq/obj/DLKM/qca_cld3_qca6174.ko_intermediates/qca_cld3_qca6174.ko)
+[ 95% 1734/1821] Install: out/target/product/msmnile_gvmq/dlkm/lib/modules/qca_cld3_qca6174.ko
+[ 95% 1735/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/qca_cld3_qca6174.ko
+[ 95% 1736/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/qca_cld3_qca6174.ko
+[ 95% 1737/1821] build out/target/product/msmnile_gvmq/obj/vendor/qcom/opensource/wlan/qcacld-3.0/.qca6390/buildko.timestamp
+make: Entering directory '/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4'
+/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/kernel/msm-5.4/../../vendor/qcom/opensource/wlan/qcacld-3.0/.qca6390/Kbuild:46: "Overriding WLAN config with:  CONFIG_FEATURE_COEX=y CONFIG_QCACLD_FEATURE_BTC_CHAIN_MODE=y CONFIG_IPA3=y CONFIG_IPA_OFFLOAD=y CONFIG_WDI3_IPA_OVER_GSI=y CONFIG_ENABLE_SMMU_S1_TRANSLATION=y"
+../../vendor/qcom/opensource/wlan/qcacld-3.0/.qca6390/Kbuild:46: "Overriding WLAN config with:  CONFIG_FEATURE_COEX=y CONFIG_QCACLD_FEATURE_BTC_CHAIN_MODE=y CONFIG_IPA3=y CONFIG_IPA_OFFLOAD=y CONFIG_WDI3_IPA_OVER_GSI=y CONFIG_ENABLE_SMMU_S1_TRANSLATION=y"
+  LTO [M] ../../vendor/qcom/opensource/wlan/qcacld-3.0/.qca6390/wlan.lto.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  LD [M]  ../../vendor/qcom/opensource/wlan/qcacld-3.0/.qca6390/wlan.ko
+make: Leaving directory '/opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/kernel/msm-5.4'
+[ 95% 1738/1821] build out/target/product/msmnile_gvmq/obj/vendor/qcom/opensource/wlan/qcacld-3.0/.qca6390/qca_cld3_qca6390.ko
+[ 95% 1739/1821] target Prebuilt: qca_cld3_qca6390.ko (out/target/product/msmnile_gvmq/obj/DLKM/qca_cld3_qca6390.ko_intermediates/qca_cld3_qca6390.ko)
+[ 95% 1740/1821] Install: out/target/product/msmnile_gvmq/dlkm/lib/modules/qca_cld3_qca6390.ko
+[ 95% 1741/1821] build out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_vendor_stripped_intermediates/qca_cld3_qca6390.ko
+[ 95% 1742/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/qca_cld3_qca6390.ko
+[ 95% 1743/1821] target  C: libicc <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/icc.c
+[ 95% 1744/1821] target thumb C: libhdmipassthru_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/passthru.c
+[ 95% 1745/1821] target thumb C: libhfp_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/hfp.c
+[ 95% 1746/1821] target  C: libhdmipassthru <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 95% 1747/1821] target  C: libhfp <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/hfp.c
+[ 95% 1748/1821] target thumb C: libicc_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/icc.c
+[ 96% 1749/1821] target  C: libicc <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 96% 1750/1821] target thumb C: libautohal_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 96% 1751/1821] target thumb C: libautohal_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/auto_hal.c
+[ 96% 1752/1821] target  C: libautohal <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/auto_hal.c
+[ 96% 1753/1821] target  C: libhdmipassthru <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/passthru.c
+[ 96% 1754/1821] target SharedLib: libicc (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libicc_intermediates/LINKED/libicc.so)
+[ 96% 1755/1821] target  C: libautohal <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 96% 1756/1821] target thumb C: libhfp_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 96% 1757/1821] target thumb C: libicc_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 96% 1758/1821] target SharedLib: libautohal_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libautohal_intermediates/LINKED/libautohal.so)
+[ 96% 1759/1821] target  C: libhfp <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 96% 1760/1821] target SharedLib: libhdmipassthru (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libhdmipassthru_intermediates/LINKED/libhdmipassthru.so)
+[ 96% 1761/1821] target Symbolic: libautohal_32 (out/target/product/msmnile_gvmq/symbols/vendor/lib/libautohal.so)
+[ 96% 1762/1821] target Symbolic: libicc (out/target/product/msmnile_gvmq/symbols/vendor/lib64/libicc.so)
+[ 96% 1763/1821] target SharedLib: libicc_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libicc_intermediates/LINKED/libicc.so)
+[ 96% 1764/1821] target Symbolic: libhdmipassthru (out/target/product/msmnile_gvmq/symbols/vendor/lib64/libhdmipassthru.so)
+[ 96% 1765/1821] target Symbolic: libicc_32 (out/target/product/msmnile_gvmq/symbols/vendor/lib/libicc.so)
+[ 96% 1766/1821] target thumb C: libhdmipassthru_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/device_utils.c
+[ 97% 1767/1821] target SharedLib: libhfp_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libhfp_intermediates/LINKED/libhfp.so)
+[ 97% 1768/1821] target SharedLib: libautohal (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libautohal_intermediates/LINKED/libautohal.so)
+[ 97% 1769/1821] target Symbolic: libhfp_32 (out/target/product/msmnile_gvmq/symbols/vendor/lib/libhfp.so)
+[ 97% 1770/1821] target Symbolic: libautohal (out/target/product/msmnile_gvmq/symbols/vendor/lib64/libautohal.so)
+[ 97% 1771/1821] target  C: libexthwplugin <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/ext_hw_plugin.c
+[ 97% 1772/1821] target SharedLib: libhdmipassthru_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libhdmipassthru_intermediates/LINKED/libhdmipassthru.so)
+[ 97% 1773/1821] target Symbolic: libhdmipassthru_32 (out/target/product/msmnile_gvmq/symbols/vendor/lib/libhdmipassthru.so)
+[ 97% 1774/1821] target SharedLib: libhfp (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libhfp_intermediates/LINKED/libhfp.so)
+[ 97% 1775/1821] target Symbolic: libhfp (out/target/product/msmnile_gvmq/symbols/vendor/lib64/libhfp.so)
+[ 97% 1776/1821] target SharedLib: libexthwplugin (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libexthwplugin_intermediates/LINKED/libexthwplugin.so)
+[ 97% 1777/1821] target Strip: libhfp_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libhfp_intermediates/libhfp.so)
+[ 97% 1778/1821] target Strip: libicc_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libicc_intermediates/libicc.so)
+[ 97% 1779/1821] target Symbolic: libexthwplugin (out/target/product/msmnile_gvmq/symbols/vendor/lib64/libexthwplugin.so)
+[ 97% 1780/1821] target Strip: libicc (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libicc_intermediates/libicc.so)
+[ 97% 1781/1821] target Strip: libhdmipassthru (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libhdmipassthru_intermediates/libhdmipassthru.so)
+[ 97% 1782/1821] target Strip: libautohal (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libautohal_intermediates/libautohal.so)
+[ 97% 1783/1821] target Strip: libautohal_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libautohal_intermediates/libautohal.so)
+[ 97% 1784/1821] target Strip: libexthwplugin (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libexthwplugin_intermediates/libexthwplugin.so)
+[ 98% 1785/1821] Install: out/target/product/msmnile_gvmq/vendor/lib64/libicc.so
+[ 98% 1786/1821] target thumb C: libexthwplugin_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/ext_hw_plugin.c
+[ 98% 1787/1821] Install: out/target/product/msmnile_gvmq/vendor/lib/libhfp.so
+[ 98% 1788/1821] Install: out/target/product/msmnile_gvmq/vendor/lib/libicc.so
+[ 98% 1789/1821] Install: out/target/product/msmnile_gvmq/vendor/lib64/libautohal.so
+[ 98% 1790/1821] Install: out/target/product/msmnile_gvmq/vendor/lib/libautohal.so
+[ 98% 1791/1821] Install: out/target/product/msmnile_gvmq/vendor/lib64/libhdmipassthru.so
+[ 98% 1792/1821] Install: out/target/product/msmnile_gvmq/vendor/lib64/libexthwplugin.so
+[ 98% 1793/1821] target SharedLib: libexthwplugin_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libexthwplugin_intermediates/LINKED/libexthwplugin.so)
+[ 98% 1794/1821] target Strip: libhdmipassthru_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libhdmipassthru_intermediates/libhdmipassthru.so)
+[ 98% 1795/1821] Install: out/target/product/msmnile_gvmq/vendor/lib/libhdmipassthru.so
+[ 98% 1796/1821] target Symbolic: libexthwplugin_32 (out/target/product/msmnile_gvmq/symbols/vendor/lib/libexthwplugin.so)
+[ 98% 1797/1821] target Strip: libhfp (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libhfp_intermediates/libhfp.so)
+[ 98% 1798/1821] Install: out/target/product/msmnile_gvmq/vendor/lib64/libhfp.so
+[ 98% 1799/1821] target Strip: libexthwplugin_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libexthwplugin_intermediates/libexthwplugin.so)
+[ 98% 1800/1821] Install: out/target/product/msmnile_gvmq/vendor/lib/libexthwplugin.so
+[ 98% 1801/1821] depmod out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_VENDOR_intermediates
+depmod: WARNING: could not open modules.order at /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_VENDOR_intermediates/lib/modules/0.0: No such file or directory
+depmod: WARNING: could not open modules.builtin at /opt/jzhang91/workspace/visteon_work/jmc_p789/jmc_es1/aosp-caf/out/target/product/msmnile_gvmq/obj/PACKAGING/depmod_VENDOR_intermediates/lib/modules/0.0: No such file or directory
+[ 98% 1802/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/modules.dep
+[ 99% 1803/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/modules.alias
+[ 99% 1804/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/modules.load
+[ 99% 1805/1821] Copy: out/target/product/msmnile_gvmq/vendor/lib/modules/modules.softdep
+[ 99% 1806/1821] target  C++: libbatterylistener <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/battery_listener.cpp
+[ 99% 1807/1821] target SharedLib: libbatterylistener (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libbatterylistener_intermediates/LINKED/libbatterylistener.so)
+[ 99% 1808/1821] target Symbolic: libbatterylistener (out/target/product/msmnile_gvmq/symbols/vendor/lib64/libbatterylistener.so)
+[ 99% 1809/1821] target thumb C++: libbatterylistener_32 <= vendor/qcom/opensource/audio-hal/primary-hal/hal/audio_extn/battery_listener.cpp
+[ 99% 1810/1821] target Strip: libbatterylistener (out/target/product/msmnile_gvmq/obj/SHARED_LIBRARIES/libbatterylistener_intermediates/libbatterylistener.so)
+[ 99% 1811/1821] Install: out/target/product/msmnile_gvmq/vendor/lib64/libbatterylistener.so
+[ 99% 1812/1821] target SharedLib: libbatterylistener_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libbatterylistener_intermediates/LINKED/libbatterylistener.so)
+[ 99% 1813/1821] target Symbolic: libbatterylistener_32 (out/target/product/msmnile_gvmq/symbols/vendor/lib/libbatterylistener.so)
+[ 99% 1814/1821] target Strip: libbatterylistener_32 (out/target/product/msmnile_gvmq/obj_arm/SHARED_LIBRARIES/libbatterylistener_intermediates/libbatterylistener.so)
+[ 99% 1815/1821] Install: out/target/product/msmnile_gvmq/vendor/lib/libbatterylistener.so
+[ 99% 1816/1821] build out/target/product/msmnile_gvmq/obj/NOTICE_VENDOR.xml
+[ 99% 1817/1821] build out/target/product/msmnile_gvmq/obj/NOTICE_VENDOR.xml.gz
+[ 99% 1818/1821] build out/target/product/msmnile_gvmq/vendor/etc/NOTICE.xml.gz
+[ 99% 1819/1821] Installed file list: out/target/product/msmnile_gvmq/installed-files-vendor.txt
+[ 99% 1820/1821] Target vendor fs image: out/target/product/msmnile_gvmq/vendor.img
+[100% 1821/1821] Target vbmeta image: out/target/product/msmnile_gvmq/vbmeta.img
+
