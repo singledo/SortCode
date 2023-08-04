@@ -31,16 +31,18 @@ u4 RandomLen(u4 maxlen);
 
 void RandomU8(u8 *val, u8 MaxVal);
 
+void _debug(const char *fmt, ...);
+
 #define D(fmt, ...) \
 {\
     printf("[%s],[%d]  #### ",__FUNCTION__,__LINE__); \
-	debug(fmt, ##__VA_ARGS__); \
+	_debug(fmt, ##__VA_ARGS__); \
 }\
 
 #define DEBUG(fmt, ...) \
 {\
     printf("[%s],[%d] #### ",__FUNCTION__,__LINE__); \
-	debug(fmt, ##__VA_ARGS__); \
+	_debug(fmt, ##__VA_ARGS__); \
 }\
 
 
