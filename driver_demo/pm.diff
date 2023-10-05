@@ -1,0 +1,112 @@
+diff --git a/drivers/misc/adau1977/i2c-adau1977.c b/drivers/misc/adau1977/i2c-adau1977.c
+index b33941b201eb..b725776e35cc 100644
+--- a/drivers/misc/adau1977/i2c-adau1977.c
++++ b/drivers/misc/adau1977/i2c-adau1977.c
+@@ -501,8 +501,8 @@ static int adau1977_runtime_resume(struct device *dev)
+ 
+ static const struct dev_pm_ops adau1977_pm =
+ {
+-    .runtime_suspend  = adau1977_runtime_suspend,
+-    .runtime_resume   = adau1977_runtime_resume,
++    SET_SYSTEM_SLEEP_PM_OPS(adau1977_runtime_suspend, adau1977_runtime_resume)
++        SET_RUNTIME_PM_OPS (adau1977_runtime_suspend, adau1977_runtime_resume, NULL)
+ };
+ 
+ static struct i2c_driver adau1977_driver = {
+diff --git a/drivers/misc/pcm6240/i2c-pcm6240.c b/drivers/misc/pcm6240/i2c-pcm6240.c
+index 8f2735121f9f..4d3e517723c4 100644
+--- a/drivers/misc/pcm6240/i2c-pcm6240.c
++++ b/drivers/misc/pcm6240/i2c-pcm6240.c
+@@ -23,6 +23,7 @@
+ #include <linux/device.h>
+ #include <asm/ioctl.h>
+ #include <linux/uaccess.h>
++#include <linux/pm_runtime.h>
+ 
+ #define REG_CMD 'A'
+ #define PCM6240_RCMD _IOR(REG_CMD, 0, reg_ioctl_r)
+@@ -35,6 +36,8 @@
+ typedef struct reg_ioctl_w reg_ioctl_w;
+ typedef struct reg_ioctl_r reg_ioctl_r;
+ 
++#define PM_SUPPORT 1
++
+ struct reg_ioctl_r
+ {
+     uint16_t reg_offset;
+@@ -271,6 +274,12 @@ int pcm6240_init (void *arg)
+         dev_err (&client->dev, "device_create failed");
+         goto chrdev_error;
+     }
++    
++
++    dev_err (&client->dev, "depth [%d]", client->dev.power.disable_depth);
++    pm_runtime_set_active (&client->dev);
++    pm_runtime_enable (&client->dev);
++    dev_err (&client->dev, "depth [%d]", client->dev.power.disable_depth);
+     return 0;
+ 
+ chrdev_error:
+@@ -327,6 +336,8 @@ static int pcm6240_remove(struct i2c_client *client)
+     }
+ 
+ 
++    pm_runtime_disable (&client->dev);
++    pm_runtime_set_suspended (&client->dev);
+     return 0;
+ }
+ 
+@@ -437,10 +448,11 @@ static const struct i2c_device_id pcm6240_id[] =
+ 
+ #ifdef PM_SUPPORT
+ 
+-static struct task_struct * pcm6240_resume = NULL;
+ 
+ static int pcm6240_runtime_suspend(struct device *dev)
+ {
++    dev_err (&p_data->client->dev, " pcm6240_runtime_suspend ");
++    pm_runtime_put (dev);
+     return 0;
+ }
+ 
+@@ -463,10 +475,6 @@ int pcm6240_reset (void *data)
+         {
+             break;
+         }
+-        else
+-        {
+-            dev_err (&p_data->client->dev, "[%s],[%d]\n",__FUNCTION__,__LINE__);
+-        }
+     }
+     if (i_ret != 0)
+     {
+@@ -481,23 +489,18 @@ int pcm6240_reset (void *data)
+ 
+ static int pcm6240_runtime_resume(struct device *dev)
+ {    
+-    int err = 0;
+-
+-    pcm6240_resume = kthread_create (pcm6240_reset, (void*) p_data, "%s",  "pcm6240_resume");
+-    if (IS_ERR(pcm6240_resume)) {
+-        err = PTR_ERR(pcm6240_resume);
+-        dev_err (&p_data->client->dev, "create resume thread for pcm6240 task failed !!!!!");
+-        return 1;
+-    }
+-    wake_up_process (pcm6240_resume);
++    pm_runtime_get (dev);
++    pcm6240_reset (p_data);
++    pm_runtime_set_active (dev);
++    dev_err (&p_data->client->dev, " pcm6240_runtime_resume");
+     return 0;
+ }
+ 
+ 
+ static const struct dev_pm_ops pcm6240_pm =
+ {
+-    .runtime_suspend  = pcm6240_runtime_suspend,
+-    .runtime_resume   = pcm6240_runtime_resume,
++    SET_SYSTEM_SLEEP_PM_OPS (pcm6240_runtime_suspend, pcm6240_runtime_resume)
++    SET_RUNTIME_PM_OPS(pcm6240_runtime_suspend, pcm6240_runtime_resume, NULL)
+ };
+ #endif
+ 
