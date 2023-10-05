@@ -11,7 +11,7 @@ cb_entry_t * CBEntry_create (int data_len)
     cb_entry_t *p_entry = (cb_entry_t *)malloc(sizeof(cb_entry_t));
     if (NULL == p_entry)
     {
-        DEBUG("malloc failed -  cb_entry_t ");
+        CB_DEBUG ("malloc failed -  cb_entry_t ");
         return NULL;
     }
     p_entry->data    = NULL;
@@ -23,7 +23,7 @@ cb_entry_t * CBEntry_create (int data_len)
     p_entry->data = (u8 *) malloc(data_len);
     if (NULL == p_entry->data)
     {
-        DEBUG("malloc failed -  p_entry->data");
+        CB_DEBUG("malloc failed -  p_entry->data");
         free (p_entry);
         return NULL;
     }
@@ -166,10 +166,7 @@ u32 CBEntry_write (cb_entry_t * entry, u8 *w_data, u32 len)
     {
         p_entry->full = true;
     }
-#if 0
-    printf ("2-e:[%d] s:[%d] len:[%d] vaild:[%d] nwrite:[%d] \n", \
-            p_entry->e_index, p_entry->s_index, p_entry->len, w_vaild, nwrite);
-#endif
+
     pthread_mutex_unlock (&p_entry->mutex);
 
     return  nwrite;
@@ -233,4 +230,19 @@ u32 CBEnret_read (cb_entry_t * entry, u8 *r_data, u32 len)
     pthread_mutex_unlock (&p_entry->mutex);
 
     return nread;
+}
+
+int l_save (char *fmt, ...)
+{
+    char buf[1024];
+    memset (buf, 0, 1024);
+    int len = 0;
+
+    va_list ap;
+    va_start (ap, fmt);
+    len = vsnprintf (buf, 1024, fmt, ap);
+    va_end (ap);
+    
+    printf ("len:%d [%s]", len, buf);
+    return len;
 }

@@ -1,8 +1,20 @@
 #ifndef _circularBuff_h
 #define _circularBuff_h
 
-#include "com.h"
 #include <pthread.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdbool.h>
+#include <time.h>
+#include <stdarg.h>
+#include <assert.h>
+#include <errno.h>
+
+typedef unsigned int    u32;
+typedef unsigned short  u16;
+typedef unsigned char   u8;
 
 #define DATA_MAX (215)
 
@@ -29,5 +41,9 @@ u32 CBEnret_read (cb_entry_t * entry, u8 *r_data, u32 len);
 u32 CBEntry_vaild_w (cb_entry_t * entry);
 
 u32 CBEntry_vaild_r (cb_entry_t * entry);
+
+#define CB_DEBUG printf
+
+int l_save (char *fmt, ...);
 
 #endif

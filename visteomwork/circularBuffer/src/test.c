@@ -1,5 +1,5 @@
 #include "circularBuff.h"
-
+#if 0
 void* readThread(void *arg);
 void * writeThread (void *arg);
 
@@ -113,14 +113,14 @@ void* readThread(void *arg)
         nread = CBEnret_read (p_entry, p_str, 255); 
         if (nread > 0)
         {
-            printf ("%s$%d$ \n", p_str, nread);
+            printf ("%s\n", p_str);
         }
         else
         {
             /*printf("[%s],[%d]nread: %d \n",__FUNCTION__,__LINE__, nread);*/
         }
         RandomU8(&ndelay, 250);
-        usleep (10*ndelay);
+        usleep (1000*400);
     }
     return (void*) 0;
 }
@@ -146,20 +146,32 @@ void * writeThread (void *arg)
     {
         memset (p_data, 0, 255);
 
-        sprintf (p_data, "send time: %04d", time);
+        sprintf (p_data, "send time: %04d#-|", time);
 
         nwrite = CBEntry_write (p_entry, p_data, strlen(p_data));
         if (nwrite <= 0)
         {
-            /*printf("[%s],[%d]",__FUNCTION__,__LINE__);*/
+            printf("[%s],[%d][loss :%d ] \n",__FUNCTION__,__LINE__, time);
+        }
+        else if (nwrite != strlen(p_data))
+        {
+            printf("[%s],[%d][%u] [%u] \n",__FUNCTION__,__LINE__,\
+                   nwrite, strlen(p_data));
         }
         time += 1;
         RandomU8(&ndelay, 250);
-        usleep (1000*ndelay);
+        usleep (10*ndelay);
     }
 
     return (void*)0;
 }
 
 
-
+#else
+int main (int argc, char *argv[])
+{
+    l_save ("%s: %d", "zhangjun", 10);
+    l_save ("sssss");
+    return 0;
+}
+#endif

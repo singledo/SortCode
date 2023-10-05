@@ -2,11 +2,9 @@ cc=gcc
 cflag= -g
 lib= -lc -pthread
 COMDIR=../../com
-inc= -I ${COMDIR} \
-	 -I inc/
+inc= -I inc/
 
 src=./src/test.c \
-	${COMDIR}/com.c \
 	./src/circularBuff.c
 
 obj=$(src:.o=.c)
