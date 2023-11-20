@@ -1,0 +1,139 @@
+# -*- coding: utf-8 -*-
+import os
+import re
+
+# 1970-01-01 00:00:01.163 20486 1 E devc_quipv3 Invalid clock handle
+class jmcTTime():
+    def  __init__(self, day_str, hour_str):
+        self.day_str=day_str
+        self.hour_str=hour_str
+        self.year=0
+        self.mouth=0
+        self.day=0
+        self.hour=0
+        self.minute=0
+        self.second=0
+        self.milsecond=0
+        self.dayStr2Int()
+        self.hourStr2Int()
+        
+    def dayStr2Int(self):
+        dayArry=self.day_str.split('-')
+        if len(dayArry) != 3:
+            print("%s-resolve failed"%(self.day_str))
+            return false
+        else:
+            self.year=int(dayArry[0])
+            self.mouth=int(dayArry[1])
+            self.day=int(dayArry[2])
+        pass
+        
+    def hourStr2Int(self):
+        hourArry=re.split(':|\\.', self.hour_str)
+        if len(hourArry)!=4:
+            print("%s-%d resolve failed"%(self.hour_str,  len(hourArry)))
+        else:
+            self.hour=int(hourArry[0])
+            self.minute=int(hourArry[1])
+            self.second=int(hourArry[2])
+            self.milsecond=int(hourArry[3])
+        pass
+    
+    def timeStr(self):
+        return "%d-%d-%d %d:%d:%d.%d"%(self.year, self.mouth, self.day, self.hour, self.minute, self.second, self.milsecond)
+        
+    def timeShow(self):
+        print("%d-%d-%d %d:%d:%d.%d"%(self.year, self.mouth, self.day, self.hour, self.minute, self.second, self.milsecond))
+
+def GETime(time1,time2):
+    if time1.year > time2.year:
+        return True
+    elif time1.year < time2.year:
+        return False
+    if time1.mouth > time2.mouth:
+        return True
+    elif time1.mouth < time2.mouth:
+        return False
+    if time1.day > time2.day:
+        return True
+    elif time1.day < time2.day:
+        return False
+    if time1.hour > time2.hour:
+        return True
+    elif time1.hour < time2.hour:
+        return False
+    if time1.minute > time2.minute:
+        return True
+    elif time1.minute < time2.minute:
+        return False
+    if time1.second > time2.second:
+        return True
+    elif time1.second < time2.second:
+        return False
+    if time1.milsecond > time2.milsecond:
+        return True
+    elif time1.milsecond <= time2.milsecond:
+        return False
+
+        
+def EQTime(time1,time2):
+    if time1.year   == time2.year and \
+    time1.mouth     == time2.mouth and \
+    time1.day       == time2.day and \
+    time1.hour      == time2.hour and \
+    time1.minute    == time2.minute and \
+    time1.second    == time2.second and \
+    time1.milsecond == time2.milsecond:
+        return True
+    else:
+        return False
+
+def LETime(time2,time1):
+    if time1.year < time2.year:
+        return True
+    elif time1.year < time2.year:
+        return False
+    if time1.mouth > time2.mouth:
+        return True
+    elif time1.mouth < time2.mouth:
+        return False
+    if time1.day > time2.day:
+        return True
+    elif time1.day < time2.day:
+        return False
+    if time1.hour > time2.hour:
+        return True
+    elif time1.hour < time2.hour:
+        return False
+    if time1.minute > time2.minute:
+        return True
+    elif time1.minute < time2.minute:
+        return False
+    if time1.second > time2.second:
+        return True
+    elif time1.second < time2.second:
+        return False
+    if time1.milsecond > time2.milsecond:
+        return True
+    elif time1.milsecond <= time2.milsecond:
+        return False
+
+        
+if __name__ == '__main__':
+    sourceStr=r"1970-01-01 00:00:01.163 20486 1 E devc_quipv3 Invalid clock handle"
+    strArry=sourceStr.split(' ')
+    print("[%s][%s]"%(strArry[0], strArry[1]))
+    time1=jmcTTime(strArry[0], strArry[1])
+    time1.timeShow()
+    time2Source="2023-11-13 12:20:29.649 561205 40 E AIS ais_get_frame:3081 ERR CameraQueueIsEmpty call failed: 47"
+    time2Arry=time2Source.split(' ')
+    time2=jmcTTime(time2Arry[0], time2Arry[1])
+    
+    if LETime(time1, time2) == True:
+        print("%s less than %s"%(time1.timeStr(), time2.timeStr()))   
+        
+    if GETime(time1, time2) == True:
+        print("%s greater than %s"%(time1.timeStr(), time2.timeStr()))
+    else:
+        print("%s not greater than %s"%(time1.timeStr(), time2.timeStr()))
+        
