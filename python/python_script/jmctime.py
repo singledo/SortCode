@@ -19,13 +19,17 @@ class jmcTTime():
         
     def dayStr2Int(self):
         dayArry=self.day_str.split('-')
-        if len(dayArry) != 3:
-            print("%s-resolve failed"%(self.day_str))
-            return false
-        else:
+        if len(dayArry) == 3:
             self.year=int(dayArry[0])
             self.mouth=int(dayArry[1])
             self.day=int(dayArry[2])
+        elif len(dayArry) == 2:
+            self.year=2023
+            self.mouth=int(dayArry[0])
+            self.day=int(dayArry[1])
+        else:
+            print("%s-resolve failed"%(self.day_str))
+            return False
         pass
         
     def hourStr2Int(self):
@@ -118,6 +122,9 @@ def LETime(time2,time1):
     elif time1.milsecond <= time2.milsecond:
         return False
 
+def interTime(startTime, endTime):
+        return (endTime.hour-startTime.hour)*3600*1000+(endTime.minute-startTime.minute)*60*1000+(endTime.second-startTime.second)*1000 + \
+                (endTime.milsecond-startTime.milsecond)
         
 if __name__ == '__main__':
     sourceStr=r"1970-01-01 00:00:01.163 20486 1 E devc_quipv3 Invalid clock handle"

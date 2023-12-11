@@ -104,7 +104,7 @@ if __name__ == '__main__':
     for node in outList:
         sub_xtag=r"0x35"
         sub_ytag=r"0x36"
-        if re.search(sub_xtag, node.line):
+        if re.search(sub_xtag, node.line): 
             _xArry=node.line.split(' ')
             #print("%d"%(len(_xArry)))
             px.append(int(_xArry[13]))
