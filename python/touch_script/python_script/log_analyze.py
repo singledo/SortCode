@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+import os
+import re
+import zipfile
+from jmctime import jmcTTime 
+from jmctime import GETime   
+from jmctime import EQTime   
+from jmctime import LETime   
+import shutil
+from p756_touch import filterTime
+
+def empty_folder(folder_path):
+    try:
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        #print(f"成功清空文件夹 {folder_path}！")
+    except FileNotFoundError:
+        print(f"文件夹 {folder_path} 不存在！")
+        
+def zip_list (dir):
+	_zip_list =[]
+	files = os.listdir(dir)
+	for node in files:
+		# print (node)
+	  if node.endswith(".zip") == True:
+	  	_zipfile=dir+"\\"+node
+	  	_zip_list.append (_zipfile)
+	return _zip_list
+
+def ziplist_uncompress (zipList):
+	for node in zipList:
+		nodeLen=len(node)
+		_uncompressDir=node[0:nodeLen-4]
+		if  os.path.exists(_uncompressDir) == True:
+			empty_folder (_uncompressDir)
+		else:
+				os.mkdir(_uncompressDir)
+				
+		zipEntry = zipfile.ZipFile(node)
+		for zipNode in zipEntry.namelist():
+			#print(zipNode)
+			_tarDir=_uncompressDir
+			#print (_tarDir)
+			zipEntry.extract(zipNode, _tarDir )
+
+
+def dir2DIMList (dir, level=0):
+	if level >= 2:
+		return None
+	else:
+		dirList=[]
+		DIMList=[]
+		files = os.listdir(dir)
+		for node in files:
+			# print (node)
+			_fullPath=dir+"\\" + node
+			if os.path.isfile(_fullPath) == True:
+				#print (_fullPath)
+				if node.startswith ("DIM_") == True and node.endswith(".log"):
+					#print(_fullPath)
+					DIMList.append (_fullPath)
+					
+			elif os.path.isdir(_fullPath) == True:
+				_subDIM=dir2DIMList (_fullPath, level+1)
+				if _subDIM != None:
+					DIMList.extend(_subDIM)
+				
+		return DIMList
+				
+				    
+def tar_list (dir):
+	_tar_list = []
+	
+def _bz2_list (dir):
+	_bz2_list = []
+	
+	
+QNX_LOGDIR=r"C:\Users\Jzhang91\Documents\WeChat Files\zhangjun1010031041\FileStorage\File\2024-03\vstgloballogcontrol_2024_3_24_15_25_22\vstgloballogcontrol\qnx\DLT"
+	
+if __name__ == '__main__':
+	print("P789 analyze log script")
+	zipList = zip_list (QNX_LOGDIR)
+	ziplist_uncompress (zipList)
+	
+	dimList=dir2DIMList(QNX_LOGDIR, 0)
+	s_time = jmcTTime ("2024-03-24", "15:21:00.00")
+	e_time = jmcTTime ("2024-03-24", "15:22:00.00")
+	TAG      ="qvm vinput: Event type "
+	outList=filterTime(dimList,s_time,e_time,TAG)
+
+	for node in outList:
+		print (node.line+node.logfile)
+  
